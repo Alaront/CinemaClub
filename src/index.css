@@ -28,6 +28,7 @@ nav {
 .content__films {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
 .content__films .card {
@@ -64,4 +65,30 @@ nav {
 
 .search-name-error input[type=text]:not(.browser-default) {
   border-bottom: 1px solid red;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pagination__item {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: 25px;
+  line-height: 30px;
+  text-transform: uppercase;
+  border: 1px solid #000000;
+  margin: 0 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination__item--current {
+  border: 3px solid #af0f0f;
+  box-sizing: border-box;
 }

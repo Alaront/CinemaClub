@@ -4,6 +4,7 @@ import FilmCard from "../components/FilmCard";
 import Preloader from "../UI/Preloader";
 import Search from "../components/Search";
 import FilmsCards from "../components/FilmsCards";
+import Pagination from "../components/Pagination";
 
 class Main extends React.Component {
     constructor(props) {
@@ -13,10 +14,13 @@ class Main extends React.Component {
             allFilms: [],
             nameSearch: 'Matrix',
             isSearch: false,
-            type: ''
+            type: '',
+            totalResults: 0,
+            page: 1
         }
 
         this.newSearch = this.newSearch.bind(this)
+        this.newPage = this.newPage.bind(this)
     }
 
     componentDidMount() {
@@ -31,19 +35,22 @@ class Main extends React.Component {
             params: {
                 apikey: '2787517e',
                 s: this.state.nameSearch,
-                type: this.state.type
+                type: this.state.type,
+                page: this.state.page
             }
         }).then(res => res);
 
-
-        console.log('data', data)
-        this.setState({allFilms: data.Search ? data.Search : [], isSearch: false})
+        this.setState({allFilms: data.Search ? data.Search : [], totalResults: data.totalResults, isSearch: false})
     }
 
     async newSearch(data) {
-        console.log('newSearch')
         await this.setState({nameSearch: data.name, type: data.type})
         this.ombdApi();
+    }
+
+    async newPage(index) {
+        await this.setState({page: index})
+        this.ombdApi()
     }
 
     render() {
@@ -59,6 +66,10 @@ class Main extends React.Component {
                             <Preloader />
                     }
                 </div>
+
+                <Pagination setNewPage={this.newPage} totalResults={Math.ceil(Number(this.state.totalResults) / 10)}/>
+
+
             </main>
         );
     }
