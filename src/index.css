@@ -11,3 +11,57 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+nav {
+  padding: 0 1rem;
+}
+
+.content {
+  min-height: calc(100vh - 70px - 64px);
+}
+
+.card-content__desc {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content__films {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content__films .card {
+  width: 22%;
+  margin: 1.5%;
+  min-width: 200px;
+}
+
+.search {
+  margin-top: 20px;
+}
+
+.search-form__radio {
+  display: flex;
+}
+
+.search-form__radio p {
+  margin-right: 30px;
+}
+
+.search-form__name {
+  position: relative;
+}
+
+.search-form__btn {
+  position: absolute;
+  top: 3px;
+  right: 0;
+}
+
+.search-name-error {
+
+}
+
+.search-name-error input[type=text]:not(.browser-default) {
+  border-bottom: 1px solid red;
+}
