@@ -13,7 +13,7 @@ class FilmsCards extends Component {
                     this.props.allFilms.length
                         ?
                         this.props.allFilms.map(item => (
-                            <FilmCard key={item.imdbID} photoSrc={item.Poster} title={item.Title} yaer={item.Year} type={item.Type}/>
+                            <FilmCard key={item.imdbID} link={item.imdbID} photoSrc={item.Poster} title={item.Title} yaer={item.Year} type={item.Type}/>
                         ))
                         :
                         <h1>Films is not found</h1>

@@ -40,6 +40,16 @@ class Main extends React.Component {
             }
         }).then(res => res);
 
+        // const {data} = await axios.get(`http://www.omdbapi.com/`, {
+        //     params: {
+        //         apikey: '2787517e',
+        //         i: "tt0242653",
+        //         plot: 'full',
+        //     }
+        // }).then(res => res);
+
+        console.log(data)
+
         this.setState({allFilms: data.Search ? data.Search : [], totalResults: data.totalResults, isSearch: false})
     }
 
