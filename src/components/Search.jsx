@@ -1,59 +1,52 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-class Search extends React.Component {
-    constructor(props) {
-        super(props);
+const Search = props => {
 
-        this.state = {
-            type: '',
-            name: '',
-            nameIsNotCorrect: false
-        }
+    const [type, setType] = useState('')
+    const [name, setName] = useState('')
+    const [nameIsNotCorrect, setNameIsNotCorrect] = useState(false);
+
+    const typeChange = e => {
+        setType(e.target.value)
     }
 
-    typeChange = e => {
-        this.setState({type: e.target.value})
+    const nameChange = e => {
+        setName(e.target.value)
     }
 
-    nameChange = e => {
-        this.setState({name: e.target.value})
-    }
-
-    newSearch = e => {
+    const newSearch = e => {
         e.preventDefault();
-        if(this.setClassErrorName()) return
+        if(setClassErrorName()) return
 
-        this.props.newSearch({name: this.state.name.trim(), type: this.state.type})
+        props.newSearch({name: name.trim(), type: type, page: 1})
     }
 
-    setClassErrorName() {
-        if(!this.state.name.length) {
-            this.setState({nameIsNotCorrect: true})
+    const setClassErrorName = () => {
+        if(!name.trim().length) {
+            setNameIsNotCorrect( true)
             return true
         } else {
-            this.setState({nameIsNotCorrect: false})
+            setNameIsNotCorrect(false)
         }
     }
 
-    render() {
-        return (
-            <div className="search">
-                <form className="search-form" onSubmit={this.newSearch}>
-                    <div className={`search-form__name ${this.state.nameIsNotCorrect ? 'search-name-error' : ''}`}>
-                        <input type="text" placeholder='Matrix' value={this.state.name} onChange={this.nameChange}/>
-                        <a className="search-form__btn waves-effect waves-light btn" onClick={this.newSearch}>Search</a>
-                    </div>
-                    <div className="search-form__radio">
-                        <p><label><input type="radio" value="" name="typefilm" checked={this.state.type === ''} onChange={this.typeChange}/> <span>ALL</span></label></p>
-                        <p><label><input type="radio" value="movie" name="typefilm" checked={this.state.type === 'movie'} onChange={this.typeChange}/> <span>Movies</span></label></p>
-                        <p><label><input type="radio" value="series"  name="typefilm" checked={this.state.type === 'series'} onChange={this.typeChange}/> <span>Series</span></label></p>
-                        <p><label><input type="radio" value="episode"  name="typefilm" checked={this.state.type === 'episode'} onChange={this.typeChange}/> <span>Episode</span></label></p>
-                    </div>
-                </form>
+    return (
+        <div className="search">
+            <form className="search-form" onSubmit={newSearch}>
+                <div className={`search-form__name ${nameIsNotCorrect ? 'search-name-error' : ''}`}>
+                    <input type="text" placeholder='Matrix' value={name} onChange={nameChange}/>
+                    <a className="search-form__btn waves-effect waves-light btn" onClick={newSearch}>Search</a>
+                </div>
+                <div className="search-form__radio">
+                    <p><label><input type="radio" value="" name="typefilm" checked={type === ''} onChange={typeChange}/> <span>ALL</span></label></p>
+                    <p><label><input type="radio" value="movie" name="typefilm" checked={type === 'movie'} onChange={typeChange}/> <span>Movies</span></label></p>
+                    <p><label><input type="radio" value="series"  name="typefilm" checked={type === 'series'} onChange={typeChange}/> <span>Series</span></label></p>
+                    <p><label><input type="radio" value="episode"  name="typefilm" checked={type === 'episode'} onChange={typeChange}/> <span>Episode</span></label></p>
+                </div>
+            </form>
 
-            </div>
-        );
-    }
+        </div>
+    );
 
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const FilmCard = (props) => {
+
     return (
         <div className="card">
             <div className="card-image waves-effect waves-block waves-light">

@@ -1,17 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-class Pagination extends React.Component {
-    constructor(props) {
-        super(props);
+const Pagination = props => {
 
-        this.state = {
-            currentPage: 1
-        }
-    }
+    const [currentPage, setCurrentPage] = useState(props.pageNumber)
 
-    allPages() {
+    const allPages = () => {
         const arr = [];
-        let allPagestotal = this.props.totalResults;
+        let allPagestotal = props.totalResults;
 
         while(allPagestotal > 0) {
             arr.push(allPagestotal)
@@ -21,28 +16,29 @@ class Pagination extends React.Component {
         return arr.length > 1 ? arr.reverse() : [];
     }
 
-    changePage(index) {
-        this.setState({currentPage: index})
-        this.props.setNewPage(index);
+    useEffect(() => {
+        setCurrentPage(props.pageNumber);
+    }, [props.pageNumber])
+
+    const changePage = index => {
+        setCurrentPage(index)
+        props.setNewPage(index);
     }
 
-    render() {
-        if(!this.props.totalResults) return null
 
-        return (
-            <div className="pagination">
-                {
-                    this.allPages().map((item) => (
-                            <div onClick={() => this.changePage(item)} key={item} className={`pagination__item ${this.state.currentPage === item ? 'pagination__item--current' : ''}`} >
-                                {item}
-                            </div>
-                        )
+    if(!props.totalResults) return null
+    return (
+        <div className="pagination">
+            {
+                allPages().map((item) => (
+                        <div onClick={() => changePage(item)} key={item} className={`pagination__item ${currentPage === item ? 'pagination__item--current' : ''}`} >
+                            {item}
+                        </div>
                     )
-                }
-            </div>
-        )
-    }
-
+                )
+            }
+        </div>
+    )
 }
 
 export default Pagination

@@ -1,88 +1,78 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import FilmCard from "../components/FilmCard";
 import Preloader from "../UI/Preloader";
 import Search from "../components/Search";
 import FilmsCards from "../components/FilmsCards";
 import Pagination from "../components/Pagination";
 
-class Main extends React.Component {
-    constructor(props) {
-        super(props);
+const Main = () => {
 
-        this.state = {
-            allFilms: [],
-            nameSearch: 'Matrix',
-            isSearch: false,
-            type: '',
-            totalResults: 0,
-            page: 1
-        }
+    const [allFilms, setAllFilms] = useState([]);
+    const [nameSearch, setNameSearch] = useState('Matrix');
+    const [type, setType] = useState('');
+    const [page, setPage] = useState(1);
 
-        this.newSearch = this.newSearch.bind(this)
-        this.newPage = this.newPage.bind(this)
-    }
-
-    componentDidMount() {
-        this.ombdApi();
-    }
+    const [isSearch, setIsSearch] = useState(false);
+    const [totalResults, setTotalResults] = useState(0);
 
 
-    async ombdApi() {
-        this.setState({isSearch: true})
+    useEffect(() => {
+        ombdApi();
+    }, [])
+
+    useEffect(() => {
+        ombdApi();
+    }, [nameSearch, type, page])
+
+    const ombdApi = async () => {
+        setIsSearch( true)
+
+        console.log('searchName omdbi', nameSearch)
 
         const {data} = await axios.get(`http://www.omdbapi.com/`, {
             params: {
                 apikey: '2787517e',
-                s: this.state.nameSearch,
-                type: this.state.type,
-                page: this.state.page
+                s: nameSearch,
+                type: type,
+                page: page
             }
         }).then(res => res);
 
-        // const {data} = await axios.get(`http://www.omdbapi.com/`, {
-        //     params: {
-        //         apikey: '2787517e',
-        //         i: "tt0242653",
-        //         plot: 'full',
-        //     }
-        // }).then(res => res);
-
-        console.log(data)
-
-        this.setState({allFilms: data.Search ? data.Search : [], totalResults: data.totalResults, isSearch: false})
+        await setAllFilms(data.Search ? data.Search : []);
+        await setTotalResults(data.totalResults);
+        await setIsSearch(false)
     }
 
-    async newSearch(data) {
-        await this.setState({nameSearch: data.name, type: data.type})
-        this.ombdApi();
+
+    const newSearch = (data) => {
+        setType(data.type);
+        setPage(1);
+        setNameSearch(data.name);
     }
 
-    async newPage(index) {
-        await this.setState({page: index})
-        this.ombdApi()
+    const newPage = (index) => {
+         setPage(index)
     }
 
-    render() {
-        return (
-            <main className="container content">
-                <Search newSearch={this.newSearch}/>
-                <div className="content__films">
-                    {
-                        !this.state.isSearch
-                            ?
-                            <FilmsCards allFilms={this.state.allFilms}/>
-                            :
-                            <Preloader />
-                    }
-                </div>
+    return (
+        <main className="container content">
+            <h1>Search: {nameSearch}</h1>
+            <h1>totalResults: {totalResults}</h1>
+            <Search newSearch={newSearch}/>
+            <div className="content__films">
+                {
+                    !isSearch
+                        ?
+                        <FilmsCards allFilms={allFilms}/>
+                        :
+                        <Preloader />
+                }
+            </div>
 
-                <Pagination setNewPage={this.newPage} totalResults={Math.ceil(Number(this.state.totalResults) / 10)}/>
+            <Pagination setNewPage={newPage} totalResults={Math.ceil(Number(totalResults) / 10)} pageNumber={page}/>
+        </main>
+    );
 
-
-            </main>
-        );
-    }
 }
 
 export default Main;
