@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import axios from "axios";
 import Preloader from "../UI/Preloader";
 import Search from "../components/Search";
@@ -22,8 +22,6 @@ const Main = () => {
 
     const ombdApi = async () => {
         setIsSearch( true)
-
-        console.log('searchName omdbi', name)
 
         const {data} = await axios.get(`http://www.omdbapi.com/`, {
             params: {

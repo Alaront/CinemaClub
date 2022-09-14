@@ -3,7 +3,7 @@ import React from 'react';
 const FilmCard = (props) => {
 
     return (
-        <div className="card">
+        <a className="card" href={`film/${props.link}`}>
             <div className="card-image waves-effect waves-block waves-light">
                 <img className="activator" src={props.photoSrc} />
             </div>
@@ -14,7 +14,7 @@ const FilmCard = (props) => {
                     <span>{props.yaer}</span>
                 </div>
             </div>
-        </div>
+        </a>
     );
 };
 
