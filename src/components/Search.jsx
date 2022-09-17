@@ -3,10 +3,10 @@ import {CustomFilmContext} from "../Context/Context";
 
 const Search = () => {
 
-    const {setType, setPage, changeName} =  useContext(CustomFilmContext);
+    const {setType, setPage, changeName, name, type} =  useContext(CustomFilmContext);
 
-    const [typeMovie, setTypeMovie] = useState('')
-    const [name, setName] = useState('')
+    const [typeMovie, setTypeMovie] = useState(type ? type : '')
+    const [nameMovie, setNameMovie] = useState(name ? name : '')
     const [nameIsNotCorrect, setNameIsNotCorrect] = useState(false);
 
     const typeChange = e => {
@@ -14,7 +14,7 @@ const Search = () => {
     }
 
     const nameChange = e => {
-        setName(e.target.value)
+        setNameMovie(e.target.value)
     }
 
     const newSearch = e => {
@@ -23,11 +23,11 @@ const Search = () => {
 
         setType(typeMovie);
         setPage(1);
-        changeName(name.trim());
+        changeName(nameMovie.trim());
     }
 
     const setClassErrorName = () => {
-        if(!name.trim().length) {
+        if(!nameMovie.trim().length) {
             setNameIsNotCorrect( true)
             return true
         } else {
@@ -39,7 +39,7 @@ const Search = () => {
         <div className="search">
             <form className="search-form" onSubmit={newSearch}>
                 <div className={`search-form__name ${nameIsNotCorrect ? 'search-name-error' : ''}`}>
-                    <input type="text" placeholder='Matrix' value={name} onChange={nameChange}/>
+                    <input type="text" placeholder='Matrix' value={nameMovie} onChange={nameChange}/>
                     <a className="search-form__btn waves-effect waves-light btn" onClick={newSearch}>Search</a>
                 </div>
                 <div className="search-form__radio">
