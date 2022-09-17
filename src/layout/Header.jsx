@@ -7,7 +7,7 @@ const Header = () => {
             <div className="nav-wrapper">
                 <Link to="/" className="brand-logo">HOME</Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
-                    <li><a href="#">Repo</a></li>
+                    <li><a href="https://github.com/Alaront/CinemaClub" target="_blank">Repo</a></li>
                 </ul>
             </div>
         </nav>
