@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import {CustomFilmContext} from "../Context/Context";
 
-const Pagination = props => {
+const Pagination = () => {
 
-    const [currentPage, setCurrentPage] = useState(props.pageNumber)
+    const {totalResults, setPage, page} = useContext(CustomFilmContext);
+
+    const [currentPage, setCurrentPage] = useState(page)
 
     const allPages = () => {
         const arr = [];
-        let allPagestotal = props.totalResults;
+        let allPagestotal = totalResults;
 
         while(allPagestotal > 0) {
             arr.push(allPagestotal)
@@ -16,17 +19,18 @@ const Pagination = props => {
         return arr.length > 1 ? arr.reverse() : [];
     }
 
+
     useEffect(() => {
-        setCurrentPage(props.pageNumber);
-    }, [props.pageNumber])
+        setCurrentPage(page);
+    }, [page])
 
     const changePage = index => {
         setCurrentPage(index)
-        props.setNewPage(index);
+        setPage(index);
     }
 
 
-    if(!props.totalResults) return null
+    if(!totalResults) return null
     return (
         <div className="pagination">
             {

@@ -32,7 +32,7 @@ const reducer = (state, {type, payload}) => {
         case 'CHANGE_TOTAL_RESULT' :
             return {
                 ...state,
-                total: payload,
+                totalResults: payload,
             }
         default :
             return {
@@ -46,7 +46,7 @@ const initialState = {
     allFilms: [],
     type: '',
     page: 1,
-    isSearch: false,
+    isSearch: true,
     totalResults: 0
 }
 

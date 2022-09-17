@@ -8,8 +8,7 @@ import {CustomFilmContext} from "../Context/Context";
 
 const Main = () => {
 
-    const {name, changeName, allFilms, setAllFilms, type, setType, page, setPage, isSearch, setIsSearch, totalResults, setTotalResults} = useContext(CustomFilmContext)
-
+    const {name, setAllFilms, type, page, isSearch, setIsSearch, setTotalResults} = useContext(CustomFilmContext)
 
 
     useEffect(() => {
@@ -33,36 +32,26 @@ const Main = () => {
         }).then(res => res);
 
         await setAllFilms(data.Search ? data.Search : []);
-        await setTotalResults(data.totalResults);
+        await setTotalResults(Math.ceil(Number(data.totalResults) / 10));
         await setIsSearch(false)
     }
 
 
-    const newSearch = (data) => {
-        setType(data.type);
-        setPage(1);
-        changeName(data.name);
-    }
-
-    const newPage = (index) => {
-         setPage(index)
-    }
-
     return (
         <main className="container content">
-            <Search newSearch={newSearch}/>
+            <Search />
 
             <div className="content__films">
                 {
                     !isSearch
                         ?
-                        <FilmsCards allFilms={allFilms}/>
+                        <FilmsCards />
                         :
                         <Preloader />
                 }
             </div>
 
-            <Pagination setNewPage={newPage} totalResults={Math.ceil(Number(totalResults) / 10)} pageNumber={page}/>
+            <Pagination />
         </main>
     );
 

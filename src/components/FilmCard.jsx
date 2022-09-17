@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const FilmCard = (props) => {
 
     return (
-        <a className="card" href={`film/${props.link}`}>
+        <Link className="card" to={`film/${props.link}`}>
             <div className="card-image waves-effect waves-block waves-light">
                 <img className="activator" src={props.photoSrc} />
             </div>
@@ -14,7 +15,7 @@ const FilmCard = (props) => {
                     <span>{props.yaer}</span>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 };
 

@@ -1,14 +1,16 @@
-import React, {Component} from "react";
+import React, {useContext} from "react";
 import FilmCard from "./FilmCard";
+import {CustomFilmContext} from "../Context/Context";
 
-const FilmsCards = (props) => {
+const FilmsCards = () => {
+    const {allFilms} = useContext(CustomFilmContext)
 
     return (
         <>
             {
-                props.allFilms.length
+                allFilms.length
                     ?
-                    props.allFilms.map(item => (
+                    allFilms.map(item => (
                         <FilmCard key={item.imdbID} link={item.imdbID} photoSrc={item.Poster} title={item.Title} yaer={item.Year} type={item.Type}/>
                     ))
                     :
