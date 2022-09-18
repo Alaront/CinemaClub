@@ -1,5 +1,4 @@
 import React from "react";
-import './assets/index.sass'
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import Main from "./pages/Main";
