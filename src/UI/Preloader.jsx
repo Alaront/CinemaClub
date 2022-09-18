@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const Preloader = () => {
     return (
-        <div className="progress">
-            <div className="indeterminate"></div>
+        <div className='progress'>
+            <div className='indeterminate'></div>
         </div>
     );
 };

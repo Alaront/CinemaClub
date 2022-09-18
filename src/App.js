@@ -6,16 +6,16 @@ import {Route, Routes} from "react-router-dom";
 import PageNotFound from "./pages/PageNotFound";
 
 function App() {
-  return (
-    <>
-      <Header />
-        <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <Header />
+            <Routes>
+                <Route path='/' element={<Main />} />
+                <Route path='*' element={<PageNotFound />} />
+            </Routes>
+            <Footer />
+        </>
+    );
 }
 
 export default App;
