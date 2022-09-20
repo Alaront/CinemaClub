@@ -6,8 +6,8 @@
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "warn",
-    "quotes": ["error", "double"],
-    "jsx-quotes": ["error", "prefer-single"],
+    "quotes": ["warn", "single"],
+    "jsx-quotes": ["warn", "prefer-single"],
     "prefer-const": "error",
     "indent": ["warn", 4],
     "comma-dangle": ["error", "always-multiline"],

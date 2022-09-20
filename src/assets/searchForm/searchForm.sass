@@ -1,0 +1,69 @@
+@import "../common/common"
+
+.search-form__title
+  font-size: 19px
+  line-height: 25px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+  color: $black_default
+  margin-bottom: 20px
+
+  +min-w($desktop)
+    font-size: 30px
+    line-height: 38px
+
+  span
+    color: $red_default
+    font-weight: 600
+
+  a
+    color: $black_default
+    text-decoration: none
+    border-bottom: 1px solid $red_default
+
+.search-form__form
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  background: #34465e
+  padding: 3px
+  border-radius: 4px
+  align-content: stretch
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+
+  +min-w($desktop)
+    padding: 5px
+    border-radius: 6px
+
+  input
+    font-size: 17px
+    line-height: 20px
+    padding: 5px 8px
+    border-radius: 3px
+    border: none
+    flex-grow: 1
+    outline: none
+
+    +min-w($desktop)
+      border-radius: 5px
+      padding: 6px 9px
+      font-size: 22px
+      line-height: 32px
+
+  button
+    width: 18%
+    max-width: 50px
+    display: block
+    background: url("./search.svg") no-repeat center center
+    background-size: contain
+    border: none
+    margin: 4px 3px
+    outline: none
+
+    +min-w($laptop)
+      max-width: 80px
+
+    +min-w($desktop)
+      max-width: 120px
+      cursor: pointer

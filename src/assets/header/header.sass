@@ -1,0 +1,84 @@
+@import "../common/common.sass"
+
+.header
+  width: 100%
+  height: 45px
+  background: #282727
+  position: relative
+
+.header__wrapper
+  display: flex
+  width: calc(100% - 10px)
+  height: 100%
+  align-items: center
+  justify-content: space-between
+  flex-direction: row
+  margin: 0 auto
+
+  +min-w($laptop)
+    max-width: calc(80%)
+
+.menu
+  height: 100%
+
+.menu__btn
+  width: 50px
+  height: 100%
+  display: flex
+  justify-content: space-between
+  flex-direction: column
+  padding: 8px 0
+  box-sizing: border-box
+  cursor: pointer
+
+  span
+    width: 100%
+    height: 4px
+    background: white
+
+.header__title
+  font-size: 30px
+  line-height: 40px
+  color: $white_default
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 600
+
+.menu__links
+  background: #1a1a1a
+  position: fixed
+  top: 45px
+  left: 0
+  width: 100%
+  padding: 8px 5px
+  box-sizing: border-box
+  display: none
+
+  +min-w($laptop)
+    padding: 8px 0
+
+  li
+    margin-bottom: 10px
+
+    &:last-child
+      margin-bottom: 0
+
+  ul
+    +min-w($laptop)
+      width: calc(80%)
+      margin: 0 auto
+
+  &.show
+    display: block
+    overflow-y: auto
+    height: 100%
+
+.menu__link
+  color: $white_default
+  font-size: 18px
+  line-height: 25px
+  text-decoration: none
+  cursor: pointer
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+
+

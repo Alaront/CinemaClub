@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import "../assets/main.sass";
+import '../assets/main.sass';
+import SearchForm from "../components/SearchForm";
 
 const Main = () => {
 
     return (
         <main className='container content'>
-            <h1 className='title'> Main page</h1>
+            <SearchForm />
         </main>
     );
 

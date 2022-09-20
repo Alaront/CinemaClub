@@ -1,17 +1,15 @@
-import React from "react";
-import {Link} from "react-router-dom";
-import "../assets/header.sass";
+import React from 'react';
+import '../assets/header/header.sass';
+import HeaderMenu from '../components/HeaderMenu';
 
 const Header = () => {
     return (
-        <nav className='green lighten-2'>
-            <div className='nav-wrapper'>
-                <Link to='/' className='brand-logo'>HOME</Link>
-                <ul id='nav-mobile' className='right hide-on-med-and-down'>
-                    <li><a href='https://github.com/Alaront/CinemaClub' target='_blank' rel='noreferrer'>Repo</a></li>
-                </ul>
+        <header className='header'>
+            <div className='header__wrapper'>
+                <HeaderMenu />
+                <h1 className='header__title'>CinemaClub</h1>
             </div>
-        </nav>
+        </header>
     );
 };
 
