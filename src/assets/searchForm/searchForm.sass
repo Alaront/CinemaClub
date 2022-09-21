@@ -31,6 +31,8 @@
   align-content: stretch
   font-family: 'Noto Sans', sans-serif
   font-weight: 400
+  position: relative
+  z-index: 2
 
   +min-w($desktop)
     padding: 5px
@@ -67,3 +69,90 @@
     +min-w($desktop)
       max-width: 120px
       cursor: pointer
+
+.search-form__form-wrapper
+  position: relative
+
+.search-form__result
+  position: absolute
+  top: 36px
+  left: 0
+  padding: 10px 3px 5px 3px
+  width: calc(100% - 69px)
+  margin-left: 3px
+  -webkit-box-shadow: 0 0 29px 32px rgba(34, 60, 80, 0.2)
+  -moz-box-shadow: 0 0 29px 32px rgba(34, 60, 80, 0.2)
+  box-shadow: 0 0 29px 32px rgba(34, 60, 80, 0.2)
+  background: $white_default
+
+  +min-w($laptop)
+    width: calc(100% - 97px)
+
+  +min-w($desktop)
+    padding: 15px 0 5px 0
+    top: 55px
+    width: calc(100% - 142px)
+
+.search-form__result-item
+  display: flex
+  flex-direction: row
+  height: 30px
+  box-sizing: border-box
+  margin: 7px 0
+  text-decoration: none
+
+  +min-w($desktop)
+    padding: 7px 5px
+    margin: 0
+
+    &:hover
+      background: #c9d1db
+      cursor: pointer
+
+  +min-w($full_desktop)
+    height: 56px
+
+
+.search-form__result-item-photo
+  width: 30px
+  height: 30px
+
+  +min-w($full_desktop)
+    width: 40px
+    height: 40px
+
+  img
+    object-fit: cover
+    display: block
+    width: 100%
+
+.search-form__result-item-text
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+  color: $black_default
+  margin-left: 10px
+  width: calc(100% - 45px)
+
+  h4
+    font-size: 12px
+    line-height: 18px
+    font-weight: 500
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    display: block
+
+  p
+    font-size: 10px
+    line-height: 12px
+
+  +min-w($full_desktop)
+
+    h4
+      font-size: 19px
+      line-height: 22px
+
+    p
+      font-size: 16px
+      line-height: 22px
+
