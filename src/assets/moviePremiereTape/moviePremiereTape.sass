@@ -32,43 +32,65 @@
   border-bottom: 1px solid $red_default
 
   +min-w($desktop)
-    font-size: 27px
+    font-size: 23px
     line-height: 28px
     cursor: pointer
 
 .movie-premiere-tape__wrapper-card
   display: flex
   overflow: scroll
-  gap: 20px
+  gap: 10px
   padding-bottom: 10px
 
   +min-w($desktop)
     overflow: hidden
+    gap: 20px
 
 .movie-premiere-tape__card
-  min-width: 40%
+  min-width: 133px
+  width: 100%
   position: relative
 
   +min-w(500px)
-    min-width: 25%
+    width: 25%
 
   +min-w(800px)
-    min-width: 17%
+    width: 17%
 
   +min-w($desktop)
-    min-width: 10%
+    width: 10%
+    flex-grow: 1
 
 .movie-premiere-tape__photo
+  min-width: 133px
   width: 100%
-  object-fit: cover
+  height: 188px
+  margin-bottom: 5px
+
+  +min-w($desktop)
+    height: 276px
+
+  img
+    width: 100%
+    height: 100%
+    display: block
+    object-fit: cover
 
 .movie-premiere-tape__card-title
   font-family: 'Noto Sans', sans-serif
   font-weight: 500
-  font-size: 15px
+  font-size: 14px
   line-height: 18px
   text-decoration: none
   color: $black_default
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  display: block
+
+  +min-w($desktop)
+    font-size: 19px
+    line-height: 28px
 
   &:before
     content: ''

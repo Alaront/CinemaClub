@@ -17,8 +17,8 @@ const SearchForm = () => {
         <div className='search-form'>
             <h1 className='search-form__title'><span>CinemaClub</span> - библиотека фильмов и сериалов на основе API <a href='#' target='_blank'>кинопоиска</a></h1>
 
-            <form className="search-form__form" onSubmit={e => e.preventDefault()}>
-                <input type="text" placeholder="Название фильма" value={filmName} onChange={e => setFilmName(e.target.value)}/>
+            <form className='search-form__form' onSubmit={e => e.preventDefault()}>
+                <input type='text' placeholder='Название фильма' value={filmName} onChange={e => setFilmName(e.target.value)}/>
                 <button></button>
             </form>
 

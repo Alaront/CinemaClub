@@ -1,12 +1,13 @@
 import React from 'react';
-import cardPhoto from '../assets/moviePremiereTape/cardPhoto.webp'
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 
-const MoviePremiereTapeCard = () => {
+const MoviePremiereTapeCard = ({posterUrl, nameRu, puthPage}) => {
     return (
-        <div className="movie-premiere-tape__card">
-            <img className="movie-premiere-tape__photo"  src={cardPhoto} alt="fireSpot"/>
-            <Link to='/' className="movie-premiere-tape__card-title">Дитя погоды</Link>
+        <div className='movie-premiere-tape__card'>
+            <div className='movie-premiere-tape__photo'>
+                <img src={posterUrl} alt='fireSpot'/>
+            </div>
+            <Link to={`/${puthPage}`} className='movie-premiere-tape__card-title'>{nameRu}</Link>
         </div>
     );
 };

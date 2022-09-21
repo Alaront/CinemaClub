@@ -9,8 +9,8 @@ const HeaderMenu = () => {
     }, [openMenu]);
 
     return (
-        <div className='menu' onClick={() => setOpenMenu(!openMenu)}>
-            <div className='menu__btn'>
+        <div className='menu'>
+            <div className='menu__btn' onClick={() => setOpenMenu(!openMenu)}>
                 <span></span>
                 <span></span>
                 <span></span>

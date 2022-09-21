@@ -1,8 +1,8 @@
 import React from 'react';
 
 import '../assets/main.sass';
-import SearchForm from "../components/SearchForm";
-import MoviePremiereTape from "../components/MoviePremiereTape";
+import SearchForm from '../components/SearchForm';
+import MoviePremiereTape from '../components/MoviePremiereTape';
 
 const Main = () => {
 
