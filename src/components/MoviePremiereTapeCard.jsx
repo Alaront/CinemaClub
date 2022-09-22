@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 const MoviePremiereTapeCard = (props) => {
 
-    const {posterUrl = '', nameRu = '', puthPage = '', countries = '', year = ''} = props
+    const {posterUrl = '', nameRu = '', puthPage = '', countries = '', year = ''} = props;
 
     return (
         <div className='movie-premiere-tape__card'>
@@ -13,7 +13,7 @@ const MoviePremiereTapeCard = (props) => {
             <Link to={`/${puthPage}`} className='movie-premiere-tape__card-title'>{nameRu}</Link>
             {
                 countries && year
-                    ? <div className="movie-premiere-tape__card-info"><span>{countries}</span> <span>{year}</span></div>
+                    ? <div className='movie-premiere-tape__card-info'><span>{countries}</span> <span>{year}</span></div>
                     : <></>
             }
         </div>

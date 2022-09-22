@@ -17,11 +17,11 @@ const HeaderMenu = () => {
             </div>
             <nav className={`menu__links ${openMenu ? 'show' : ''}`}>
                 <ul>
-                    <li><Link className='menu__link' to='#'>Главная</Link></li>
-                    <li><Link className='menu__link' to='#'>Поиск</Link></li>
-                    <li><Link className='menu__link' to='#'>Новости</Link></li>
-                    <li><Link className='menu__link' to='#'>Рецензии</Link></li>
-                    <li><Link className='menu__link' to='#'>Топы</Link></li>
+                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='/'>Главная</Link></li>
+                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Поиск</Link></li>
+                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Новости</Link></li>
+                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Рецензии</Link></li>
+                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Топы</Link></li>
                 </ul>
             </nav>
         </div>

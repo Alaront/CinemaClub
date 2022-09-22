@@ -3,7 +3,7 @@ import '../assets/main.sass';
 import '../assets/premieres.sass';
 import {useEffect} from 'react';
 import axios from 'axios';
-import MoviePremiereTapeCard from "../components/MoviePremiereTapeCard";
+import MoviePremiereTapeCard from '../components/MoviePremiereTapeCard';
 
 const Premieres = () => {
     const dataRef = useRef('');
@@ -12,8 +12,6 @@ const Premieres = () => {
     const getParams = () => {
         const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const date = dataRef.current.value ? new Date(dataRef.current.value) : new Date();
-
-        console.log(date);
 
         return {
             month: monthNames[date.getMonth()].toUpperCase(),
@@ -51,7 +49,7 @@ const Premieres = () => {
                 </label>
                 <button className='premieres__filter-btn' onClick={getData}>Поиск</button>
             </form>
-            <div className="premieres__content">
+            <div className='premieres__content'>
                 {
                     dataFilms.length  ?
                         dataFilms.map(item => <MoviePremiereTapeCard key={item.kinopoiskId} countries={item.countries[0].country} year={item.year} posterUrl={item.posterUrl} nameRu={item.nameRu ? item.nameRu : item.nameEn} puthPage={item.kinopoiskId}/>) : <></>
