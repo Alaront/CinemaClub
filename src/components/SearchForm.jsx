@@ -46,7 +46,7 @@ const SearchForm = () => {
                 </form>
 
                 {
-                    allFilms.length > 0 ?
+                    allFilms.length && filmName?
                         (
                             <div className="search-form__result">
                                 {allFilms.map(item => <SearchFormItem key={item.filmId} pathPage={item.filmId}

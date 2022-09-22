@@ -4,6 +4,7 @@ import Footer from './layout/Footer';
 import Main from './pages/Main';
 import {Route, Routes} from 'react-router-dom';
 import PageNotFound from './pages/PageNotFound';
+import Premieres from "./pages/Premieres";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <Header />
             <Routes>
                 <Route path='/' element={<Main />} />
+                <Route path='/premieres' element={<Premieres />} />
                 <Route path='*' element={<PageNotFound />} />
             </Routes>
             <Footer />
