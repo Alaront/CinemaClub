@@ -4,6 +4,7 @@ import axios from "axios";
 import '../assets/filmPage/filmPage.sass'
 import image from '../assets/filmPage/image.png'
 import SequelsPrequels from "../components/SequelsPrequels";
+import SliderComponent from "../components/Slider/SliderComponent";
 
 const FilmPage = () => {
     const {id} = useParams()
@@ -59,6 +60,7 @@ const FilmPage = () => {
             </div>
             <div className="film__content-media">
                 <h4>Галерея</h4>
+                <SliderComponent />
             </div>
         </main>
     );
