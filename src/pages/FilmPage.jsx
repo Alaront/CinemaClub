@@ -60,7 +60,11 @@ const FilmPage = () => {
             </div>
             <div className="film__content-media">
                 <h4>Галерея</h4>
-                <SliderComponent />
+                <SliderComponent sliderType="photo" viewArray={[1, 2, 3]}/>
+            </div>
+            <div className="film__content-similar">
+                <h4>Список похожих фильмов</h4>
+                <SliderComponent sliderType="card" viewArray={[1, 2, 3]}/>
             </div>
         </main>
     );

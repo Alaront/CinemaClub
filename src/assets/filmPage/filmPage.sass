@@ -247,7 +247,11 @@
     font-size: 17px
     line-height: 22px
 
-.film__content-media
+.film__content-media, .film__content-similar
+  margin-bottom: 20px
+
+  +min-w($desktop)
+    margin-bottom: 40px
 
   h4
     font-size: 19px
@@ -255,7 +259,7 @@
     font-family: 'Noto Sans', sans-serif
     font-weight: 500
     color: $black_default
-    margin-bottom: 10px
+    margin-bottom: 15px
 
     +min-w($desktop)
       font-size: 25px
