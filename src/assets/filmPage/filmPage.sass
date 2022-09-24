@@ -1,0 +1,258 @@
+@import "../common/common"
+
+.film__title
+  font-size: 19px
+  line-height: 25px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 600
+  color: $black_default
+  margin-bottom: 20px
+
+  +min-w($desktop)
+    font-size: 35px
+    line-height: 48px
+
+.film__content
+  display: flex
+  justify-content: space-between
+  gap: 20px 20px
+  flex-direction: column
+  margin-bottom: 10px
+
+  +min-w($tablet)
+    flex-direction: row
+    margin-bottom: 20px
+
+.film__photo
+  width: 100%
+
+  +min-w($tablet)
+    width: 100%
+    max-width: 386px
+
+  img
+    width: 100%
+    height: 100%
+    display: block
+    object-fit: cover
+
+.film__info
+  width: 100%
+
+  +min-w($tablet)
+    flex-grow: 1
+    width: auto
+
+.film__info-rating
+  margin-bottom: 20px
+
+  +min-w($tablet)
+    margin-bottom: 36px
+
+
+  ul
+    +min-w($tablet)
+      display: flex
+      flex-direction: row
+
+  li
+    font-size: 17px
+    line-height: 22px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 400
+    margin-bottom: 5px
+    margin-left: 25px
+
+    +min-w($tablet)
+      font-size: 19px
+      line-height: 22px
+      margin-left: 40px
+
+.film__info-data
+  margin-bottom: 20px
+
+  +min-w($tablet)
+    margin-bottom: 36px
+
+  li
+    font-size: 16px
+    line-height: 22px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 400
+    margin-bottom: 10px
+    display: flex
+    justify-content: space-between
+
+    span:nth-child(2)
+      text-align: right
+      width: 65%
+
+    +min-w($tablet)
+      font-size: 19px
+      line-height: 22px
+
+.film__description
+  margin-bottom: 20px
+
+  +min-w($tablet)
+    margin-bottom: 36px
+
+  h4
+    font-size: 19px
+    line-height: 25px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 500
+    color: $black_default
+    margin-bottom: 10px
+
+    +min-w($desktop)
+      font-size: 25px
+      line-height: 32px
+
+  p
+    font-size: 16px
+    line-height: 22px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 400
+
+.film__content-info
+  display: flex
+  justify-content: space-between
+  gap: 20px 20px
+  flex-direction: column
+  margin-bottom: 10px
+
+  +min-w($tablet)
+    flex-direction: row
+    margin-bottom: 20px
+
+
+.film__sequels-prequels
+  width: 100%
+
+  +min-w($tablet)
+    width: 100%
+    max-width: 386px
+
+  h4
+    font-size: 19px
+    line-height: 25px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 500
+    color: $black_default
+    margin-bottom: 10px
+
+    +min-w($desktop)
+      font-size: 25px
+      line-height: 32px
+
+.film__awards
+  width: 100%
+
+  +min-w($tablet)
+    flex-grow: 1
+    width: auto
+
+  h4
+    font-size: 19px
+    line-height: 25px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 500
+    color: $black_default
+    margin-bottom: 10px
+
+    +min-w($desktop)
+      font-size: 25px
+      line-height: 32px
+
+
+.film__sequels-item
+  height: 80px
+  margin-bottom: 20px
+  display: flex
+  flex-direction: row
+
+  &:nth-child(n+3)
+    display: none
+
+    .sequels-show &
+      display: flex
+
+.film__sequels-photo
+  width: auto
+  margin-right: 20px
+
+  img
+    width: 100%
+    height: 100%
+    display: block
+    object-fit: cover
+
+.film__sequels-text
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+  font-size: 14px
+  line-height: 18px
+  text-decoration: none
+  color: $black_default
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+  +min-w($desktop)
+    font-size: 19px
+    line-height: 28px
+
+  p
+    font-weight: 100
+    font-size: 12px
+    line-height: 15px
+
+    +min-w($desktop)
+      font-size: 17px
+      line-height: 22px
+
+
+.film__sequels-prequels-btn
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+  padding: 5px 50px 5px 10px
+  font-size: 12px
+  line-height: 15px
+  border: 2px solid $black_default
+  border-radius: 20px
+  display: inline
+  cursor: pointer
+  position: relative
+
+  &:before
+    content: ''
+    width: 20px
+    height: 20px
+    background: url("./arrow.svg") no-repeat center
+    background-size: contain
+    position: absolute
+    transform: rotate(270deg)
+    right: 8px
+    top: 6px
+
+    .sequels-show &
+      transform: rotate(90deg)
+
+  +min-w($desktop)
+    font-size: 17px
+    line-height: 22px
+
+.film__content-media
+
+  h4
+    font-size: 19px
+    line-height: 25px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 500
+    color: $black_default
+    margin-bottom: 10px
+
+    +min-w($desktop)
+      font-size: 25px
+      line-height: 32px

@@ -10,7 +10,7 @@ const MoviePremiereTapeCard = (props) => {
             <div className='movie-premiere-tape__photo'>
                 <img src={posterUrl} alt='fireSpot'/>
             </div>
-            <Link to={`/${puthPage}`} className='movie-premiere-tape__card-title'>{nameRu}</Link>
+            <Link to={`/films/${puthPage}`} className='movie-premiere-tape__card-title'>{nameRu}</Link>
             {
                 countries && year
                     ? <div className='movie-premiere-tape__card-info'><span>{countries}</span> <span>{year}</span></div>
