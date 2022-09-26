@@ -23,7 +23,7 @@ const Premieres = () => {
 
         axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres', {
             headers: {
-                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY,
+                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_3,
                 'Content-Type': 'application/json',
             },
             params: {

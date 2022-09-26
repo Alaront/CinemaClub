@@ -1,71 +1,128 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
-import axios from "axios";
-import '../assets/filmPage/filmPage.sass'
-import image from '../assets/filmPage/image.png'
-import SequelsPrequels from "../components/SequelsPrequels";
-import SliderComponent from "../components/Slider/SliderComponent";
+import {useParams} from 'react-router-dom';
+import axios from 'axios';
+import '../assets/filmPage/filmPage.sass';
+import image from '../assets/filmPage/image.png';
+import SequelsPrequels from '../components/SequelsPrequels';
+import SliderComponent from '../components/Slider/SliderComponent';
 
 const FilmPage = () => {
-    const {id} = useParams()
+    const {id} = useParams();
     const [film, setFilm] = useState();
+    const [filmScreen, setFilmScreen] = useState([]);
+    const [filmSimilars, setFilmSimilars] = useState([]);
 
     useEffect(() => {
-        console.log(id)
-    //     axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, {
-    //         headers: {
-    //             'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY,
-    //             'Content-Type': 'application/json',
-    //         },
-    //     }).then(res => res.data)
-    //         .then(res => console.log(res))
-    //         .catch(res => console.error(res));
-    }, [])
+        window.scrollTo(0, 0)
+
+        axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, {
+            headers: {
+                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_3,
+                'Content-Type': 'application/json',
+            },
+        }).then(res => res.data)
+            .then(res => setFilm(res))
+            .catch(res => console.error(res));
+
+        axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images`, {
+            headers: {
+                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_3,
+                'Content-Type': 'application/json',
+            },
+            params: {
+                type: 'SCREENSHOT',
+                page: 1
+            }
+        }).then(res => res.data)
+            .then(res => setFilmScreen(res.items))
+            .catch(res => console.error(res));
+
+
+        axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/similars`, {
+            headers: {
+                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_3,
+                'Content-Type': 'application/json',
+            },
+        }).then(res => res.data)
+            .then(res => setFilmSimilars(res.items))
+            .catch(res => console.error(res));
+
+    }, [id]);
+
+    const getCountry = () => {
+        let country = '';
+
+        film.countries.forEach(item => {
+            country += ` ${item.country}`
+        })
+
+        return country
+    }
+
+    const getGenres = () => {
+        let genres = '';
+
+        film.genres.forEach(item => {
+            genres += ` ${item.genre}`
+        })
+
+        return genres
+    }
 
     return (
         <main className='container content film'>
-            <h1 className="film__title">Инициал Ди: Стадия первая (сериал 1998)</h1>
-            <div className="film__content">
-                <div className="film__photo">
-                    <img src={image} alt="" />
-                </div>
-                <div className="film__info">
-                    <div className="film__info-rating">
-                        <ul>
-                            <li>kinoPoisk 1.7</li>
-                            <li>iMDB 1.7</li>
-                            <li>CC 10.7</li>
-                        </ul>
-                    </div>
-                    <div className="film__info-data">
-                        <ul>
-                            <li> <span>Год</span> <span>1998</span> </li>
-                            <li> <span>Страна</span> <span>Япония</span> </li>
-                            <li> <span>Жанр</span> <span>аниме, мультфильм, боевик, комедия, спорт</span> </li>
-                            <li> <span>Слоган</span> <span>«Drift across Second Stage's finish line!»</span> </li>
-                            <li> <span>Режиссер</span> <span>Син Мисава, Масами Хата</span> </li>
-                        </ul>
-                    </div>
-                    <div className="film__description">
-                        <h4>Описание</h4>
-                        <p>Такуми Фудзивара, сын владельца магазина тофу. По ночам он садится в свою Toyota Sprinter Trueno AE86 и гоняет по горным дорогам. Однажды гоночный клуб Акаги Ред Санз бросил вызов Акина Спид Старз, а соревноваться решили они в тех самых горах, где живет Такуми. Так и сошлись - легендарный гонщик Кейске на своей Mazda RX-7 и Такуми.</p>
-                    </div>
-                </div>
+            {
+                film?
+                    <>
+                        <h1 className='film__title'>{film.nameRu}</h1>
+                        <div className='film__content'>
+                            <div className='film__photo'>
+                                <img src={film.posterUrl || ''} alt='' />
+                            </div>
+                            <div className='film__info'>
+                                <div className='film__info-rating'>
+                                    <ul>
+                                        <li>Kinopoisk {film.ratingKinopoisk}</li>
+                                        <li>Imdb {film.ratingImdb}</li>
+                                        <li>CC 10.7</li>
+                                    </ul>
+                                </div>
+                                <div className='film__info-data'>
+                                    <ul>
+                                        <li> <span>Год</span> <span>{film.year}</span> </li>
+                                        <li> <span>Страна</span> <span>{getCountry()}</span> </li>
+                                        <li> <span>Жанр</span> <span>{getGenres()}</span> </li>
+                                        <li> <span>Слоган</span> <span>{film.slogan}</span> </li>
+                                    </ul>
+                                </div>
+                                <div className='film__description'>
+                                    <h4>Описание</h4>
+                                    <p>{film.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </> : <></>
+            }
+
+            <div className='film__content-info'>
+                <SequelsPrequels id={id}/>
             </div>
-            <div className="film__content-info">
-                <SequelsPrequels />
-                <div className="film__awards">
-                    <h4>Награды и сборы</h4>
-                </div>
-            </div>
-            <div className="film__content-media">
-                <h4>Галерея</h4>
-                <SliderComponent sliderType="photo" viewArray={[1, 2, 3]}/>
-            </div>
-            <div className="film__content-similar">
-                <h4>Список похожих фильмов</h4>
-                <SliderComponent sliderType="card" viewArray={[1, 2, 3]}/>
-            </div>
+
+            {
+                filmScreen.length ?
+                    <div className='film__content-media'>
+                        <h4>Галерея</h4>
+                        <SliderComponent data={filmScreen} sliderType='photo' viewArray={[1, 2, 3]} spaceBetween={20}/>
+                    </div> : <></>
+            }
+
+            {
+                filmSimilars.length ?
+                <div className='film__content-similar'>
+                    <h4>Список похожих фильмов</h4>
+                    <SliderComponent data={filmSimilars} sliderType='card' viewArray={[2, 5, 9]} spaceBetween={10}/>
+                </div> : <></>
+            }
         </main>
     );
 

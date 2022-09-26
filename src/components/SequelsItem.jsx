@@ -1,16 +1,19 @@
-import React from 'react';
-import image from '../assets/filmPage/image.png'
+import React, {useEffect} from 'react';
+import {Link} from "react-router-dom";
 
-const SequelsItem = () => {
+const SequelsItem = ({urlPhoto = '', name = '', sequelsUrl = ''}) => {
+    useEffect(() => {
+        console.log('sequelsUrl', sequelsUrl)
+    })
+
     return (
         <div className="film__sequels-item">
             <div className="film__sequels-photo">
-                <img src={image} alt='photo' />
+                <img src={urlPhoto} alt='photo' />
             </div>
-            <div className="film__sequels-text">
-                <h6>Initial D 2</h6>
-                <p>Year 2019</p>
-            </div>
+            <Link to={`/films/${sequelsUrl}`} className="film__sequels-text">
+                <h6>{name}</h6>
+            </Link>
         </div>
     );
 };
