@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import axios from 'axios';
 import '../assets/filmPage/filmPage.sass';
-import image from '../assets/filmPage/image.png';
 import SequelsPrequels from '../components/SequelsPrequels';
 import SliderComponent from '../components/Slider/SliderComponent';
+import {getDataFilm} from '../methods/fetchData';
 
 const FilmPage = () => {
     const {id} = useParams();
@@ -12,86 +11,54 @@ const FilmPage = () => {
     const [filmScreen, setFilmScreen] = useState([]);
     const [filmSimilars, setFilmSimilars] = useState([]);
 
+    const getFilmData = async () => {
+        const {film, screen, similars} = await getDataFilm(id);
+
+        setFilm(film);
+        setFilmScreen(screen);
+        setFilmSimilars(similars);
+    };
+
     useEffect(() => {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
 
-        axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, {
-            headers: {
-                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_3,
-                'Content-Type': 'application/json',
-            },
-        }).then(res => res.data)
-            .then(res => setFilm(res))
-            .catch(res => console.error(res));
-
-        axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images`, {
-            headers: {
-                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_3,
-                'Content-Type': 'application/json',
-            },
-            params: {
-                type: 'SCREENSHOT',
-                page: 1
-            }
-        }).then(res => res.data)
-            .then(res => setFilmScreen(res.items))
-            .catch(res => console.error(res));
-
-
-        axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/similars`, {
-            headers: {
-                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_3,
-                'Content-Type': 'application/json',
-            },
-        }).then(res => res.data)
-            .then(res => setFilmSimilars(res.items))
-            .catch(res => console.error(res));
+        getFilmData();
 
     }, [id]);
 
-    const getCountry = () => {
-        let country = '';
+    const markupData = (data, key) => {
+        let markupStr = '';
 
-        film.countries.forEach(item => {
-            country += ` ${item.country}`
-        })
+        data.forEach(item => {
+            markupStr += ` ${item[key]},`;
+        });
 
-        return country
-    }
-
-    const getGenres = () => {
-        let genres = '';
-
-        film.genres.forEach(item => {
-            genres += ` ${item.genre}`
-        })
-
-        return genres
-    }
+        return markupStr.substring(0, markupStr.length - 1);
+    };
 
     return (
         <main className='container content film'>
-            {
-                film?
-                    <>
-                        <h1 className='film__title'>{film.nameRu}</h1>
-                        <div className='film__content'>
+            <h1 className='film__title'>{film?.nameRu}</h1>
+            <div className='film__content'>
+                {
+                    film?
+                        <>
                             <div className='film__photo'>
                                 <img src={film.posterUrl || ''} alt='' />
                             </div>
                             <div className='film__info'>
                                 <div className='film__info-rating'>
                                     <ul>
-                                        <li>Kinopoisk {film.ratingKinopoisk}</li>
-                                        <li>Imdb {film.ratingImdb}</li>
-                                        <li>CC 10.7</li>
+                                        <li className='film__info-rating--kinopoisk' >Kinopoisk {film.ratingKinopoisk}</li>
+                                        <li className='film__info-rating--imdb' >Imdb {film.ratingImdb}</li>
+                                        <li className='film__info-rating--cc'>CC 10.7</li>
                                     </ul>
                                 </div>
                                 <div className='film__info-data'>
                                     <ul>
                                         <li> <span>Год</span> <span>{film.year}</span> </li>
-                                        <li> <span>Страна</span> <span>{getCountry()}</span> </li>
-                                        <li> <span>Жанр</span> <span>{getGenres()}</span> </li>
+                                        <li> <span>Страна</span> <span>{markupData(film.countries, 'country')}</span> </li>
+                                        <li> <span>Жанр</span> <span>{markupData(film.genres, 'genre')}</span> </li>
                                         <li> <span>Слоган</span> <span>{film.slogan}</span> </li>
                                     </ul>
                                 </div>
@@ -100,9 +67,9 @@ const FilmPage = () => {
                                     <p>{film.description}</p>
                                 </div>
                             </div>
-                        </div>
-                    </> : <></>
-            }
+                        </> : <></>
+                }
+            </div>
 
             <div className='film__content-info'>
                 <SequelsPrequels id={id}/>
@@ -118,10 +85,10 @@ const FilmPage = () => {
 
             {
                 filmSimilars.length ?
-                <div className='film__content-similar'>
-                    <h4>Список похожих фильмов</h4>
-                    <SliderComponent data={filmSimilars} sliderType='card' viewArray={[2, 5, 9]} spaceBetween={10}/>
-                </div> : <></>
+                    <div className='film__content-similar'>
+                        <h4>Список похожих фильмов</h4>
+                        <SliderComponent data={filmSimilars} sliderType='card' viewArray={[2, 5, 9]} spaceBetween={10}/>
+                    </div> : <></>
             }
         </main>
     );

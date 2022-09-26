@@ -22,6 +22,7 @@
   +min-w($tablet)
     flex-direction: row
     margin-bottom: 50px
+    min-height: 580px
 
 .film__photo
   width: 100%
@@ -63,13 +64,60 @@
     line-height: 22px
     font-family: 'Noto Sans', sans-serif
     font-weight: 400
-    margin-bottom: 5px
-    margin-left: 25px
+    margin-bottom: 8px
+    margin-left: 37px
 
     +min-w($tablet)
       font-size: 19px
       line-height: 22px
       margin-left: 40px
+      margin-bottom: 5px
+
+
+    &:first-child
+      margin-left: 28px
+
+  &--kinopoisk
+    position: relative
+
+    &:before
+      content: ''
+      background: url("./kp-logo.png") center center
+      background-size: cover
+      width: 20px
+      height: 20px
+      position: absolute
+      left: -27px
+      top: 2px
+
+  &--imdb
+    position: relative
+
+    &:before
+      content: ''
+      background: url("./imdb-logo.png") center center no-repeat
+      background-size: 89%
+      width: 36px
+      height: 20px
+      position: absolute
+      left: -37px
+      top: 2px
+
+  &--cc
+    position: relative
+
+    &:before
+      content: 'СС'
+      font-size: 20px
+      line-height: 22px
+      transform: rotate(10deg)
+      width: 26px
+      height: 20px
+      position: absolute
+      left: -31px
+      top: -1px
+      border: 1px solid $black_default
+      border-radius: 2px
 
 .film__info-data
   margin-bottom: 20px
@@ -169,10 +217,11 @@
 
 
 .film__sequels-item
-  height: 80px
+  height: 110px
   margin-bottom: 20px
   display: flex
   flex-direction: row
+  align-items: flex-start
 
   &:nth-child(n+3)
     display: none
@@ -181,7 +230,8 @@
       display: flex
 
 .film__sequels-photo
-  width: auto
+  width: 80px
+  height: 100%
   margin-right: 20px
   border-radius: 3px
   overflow: hidden
@@ -194,14 +244,14 @@
 
 .film__sequels-text
   font-family: 'Noto Sans', sans-serif
-  font-weight: 400
+  font-weight: 500
   font-size: 14px
   line-height: 18px
   text-decoration: none
   color: $black_default
-  white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
+  width: calc(100% - 100px)
 
   +min-w($desktop)
     font-size: 19px

@@ -5,7 +5,7 @@ import '../../assets/slider/slider.sass';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import SliderComponentItemPhoto from './SliderComponentItemPhoto';
-import MoviePremiereTapeCard from "../MoviePremiereTapeCard";
+import MoviePremiereTapeCard from '../MoviePremiereTapeCard';
 
 const SliderComponent = (props) => {
     const {data = [], sliderType, viewArray, spaceBetween} = props;
@@ -22,12 +22,12 @@ const SliderComponent = (props) => {
 
     const updateWidthAndHeight = () => {
         setWidth(window.innerWidth);
-        setSlideView(() => startView())
+        setSlideView(() => startView());
     };
 
     useEffect(() => {
-        window.addEventListener("resize", updateWidthAndHeight);
-        return () => window.removeEventListener("resize", updateWidthAndHeight);
+        window.addEventListener('resize', updateWidthAndHeight);
+        return () => window.removeEventListener('resize', updateWidthAndHeight);
     });
 
 

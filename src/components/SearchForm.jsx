@@ -22,7 +22,7 @@ const SearchForm = () => {
                 page: 1,
             },
             headers: {
-                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_3,
+                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
                 'Content-Type': 'application/json',
             },
         }).then(res => res.data)
