@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import '../assets/filmPage/filmPage.sass';
 import SequelsPrequels from '../components/SequelsPrequels';
 import SliderComponent from '../components/Slider/SliderComponent';
-import {getDataFilm} from '../methods/fetchData';
+import {getDataFilm} from '../scripts/fetchData';
 
 const FilmPage = () => {
     const {id} = useParams();

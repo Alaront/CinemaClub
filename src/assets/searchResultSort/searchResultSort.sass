@@ -1,0 +1,64 @@
+@import "../common/common.sass"
+
+.search-result-sort
+  +min-w($tablet)
+    display: flex
+    justify-content: space-between
+
+.search-result-sort__type
+  color: $black_default
+  display: flex
+  justify-content: space-between
+  max-width: 270px
+  width: calc(100% - 70px)
+  font-size: 18px
+  line-height: 22px
+  font-family: 'Noto Sans', sans-serif
+  font-style: normal
+  font-weight: 500
+  margin-bottom: 10px
+
+  +min-w($tablet)
+    margin-bottom: 0
+
+  span.active
+    color: #774549
+
+  span:nth-child(n + 2)
+    cursor: pointer
+
+.search-result-sort__view
+  position: relative
+  font-size: 18px
+  line-height: 22px
+  font-family: 'Noto Sans', sans-serif
+  font-style: normal
+  font-weight: 500
+  padding-right: 45px
+  cursor: pointer
+
+  +min-w($desktop)
+    padding-right: 75px
+
+  &:after
+    content: ''
+    position: absolute
+    right: 0
+    top: 0
+    width: 37px
+    height: 18px
+
+    +min-w($desktop)
+      width: 66px
+      height: 33px
+      top: -9px
+
+  &.min-card
+    &:after
+      background: url("./card-view-min.svg") 0 0 no-repeat
+      background-size: cover
+
+  &.max-card
+    &:after
+      background: url("./card-view-max.svg") 0 0 no-repeat
+      background-size: cover

@@ -1,0 +1,52 @@
+@import "../common/common.sass"
+
+.filter-select
+  padding: 9px 7px
+  border-radius: 5px
+  border: 1px solid $black_default
+  box-sizing: border-box
+  margin-bottom: 30px
+
+  h6
+    font-size: 18px
+    line-height: 22px
+    font-family: 'Noto Sans', sans-serif
+    font-style: normal
+    font-weight: 500
+    padding-right: 45px
+    cursor: pointer
+    margin-bottom: 10px
+
+
+.filter-select__form
+  display: flex
+  flex-direction: column
+
+.filter-select__label
+  font-size: 18px
+  line-height: 22px
+  font-family: 'Noto Sans', sans-serif
+  font-style: normal
+  font-weight: 300
+  margin-bottom: 10px
+  cursor: pointer
+
+  input
+    margin-right: 8px
+
+
+.filter-select__label
+  &:nth-child(n+6)
+    display: none
+    
+    .filter-select-show &
+      display: block
+
+.filter-select__btn
+  font-size: 18px
+  line-height: 22px
+  font-family: 'Noto Sans', sans-serif
+  font-style: normal
+  font-weight: 300
+  cursor: pointer
+  margin-top: 20px

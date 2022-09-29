@@ -1,0 +1,55 @@
+@import "../common/common.sass"
+
+.form-search-main
+  width: 100%
+  background: #7A96A6
+  box-sizing: border-box
+  border-radius: 11px
+  padding: 8px
+  display: flex
+  margin-bottom: 15px
+
+  +min-w($laptop)
+    padding: 15px
+    margin-bottom: 20px
+
+.form-search-main__input
+  background: $white_default
+  border-radius: 8px 0 0 8px
+  padding: 10px
+  font-family: 'Noto Sans', sans-serif
+  font-style: normal
+  font-weight: 500
+  font-size: 19px
+  line-height: 24px
+  outline: none
+  border: none
+  margin-right: 1px
+  flex-grow: 1
+  box-sizing: border-box
+  width: 80%
+
+  +min-w($laptop)
+    font-size: 32px
+    line-height: 44px
+    padding: 10px
+
+.form-search-main__btn
+  background: #774549
+  border-radius: 0 8px 8px 0
+  font-family: 'Noto Sans', sans-serif
+  color: $white_default
+  font-style: normal
+  font-weight: 500
+  font-size: 17px
+  line-height: 24px
+  outline: none
+  border: none
+  max-width: 267px
+  box-sizing: border-box
+  width: 25%
+  cursor: pointer
+
+  +min-w($laptop)
+    font-size: 32px
+    line-height: 44px
