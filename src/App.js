@@ -6,7 +6,7 @@ import {Route, Routes} from 'react-router-dom';
 import PageNotFound from './pages/PageNotFound';
 import Premieres from './pages/Premieres';
 import FilmPage from './pages/FilmPage';
-import SearchPage from "./pages/SearchPage";
+import SearchPage from './pages/SearchPage';
 
 function App() {
     return (

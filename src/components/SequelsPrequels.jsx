@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SequelsItem from './SequelsItem';
-import {getDataSequels} from "../scripts/fetchData";
+import {getDataSequels} from '../scripts/fetchData';
 
 const SequelsPrequels = ({id}) => {
     const [showSequels, setShowSequels] = useState(false);
@@ -8,8 +8,8 @@ const SequelsPrequels = ({id}) => {
 
     const filmData = async () => {
         const data = await getDataSequels(id);
-        setFilm(data || [])
-    }
+        setFilm(data || []);
+    };
 
     useEffect(() => {
         filmData();

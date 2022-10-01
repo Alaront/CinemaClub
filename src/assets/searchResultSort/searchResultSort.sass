@@ -60,3 +60,24 @@
       background: url("./card-view-max.svg") 0 0 no-repeat
       background-size: contain
 
+.search-page__result-pagination
+  ul
+    display: flex
+
+  li
+    margin-right: 10px
+    border: 1px solid $red_default
+    padding: 5px
+    font-size: 18px
+    line-height: 22px
+    width: 23px
+    height: 23px
+    text-align: center
+    font-family: 'Noto Sans', sans-serif
+    font-style: normal
+    font-weight: 500
+    cursor: pointer
+
+    &.current
+      border: 1px solid $green_default
+      color: $red_default

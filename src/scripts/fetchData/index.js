@@ -42,7 +42,7 @@ function getHeaders() {
     return {
         'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
         'Content-Type': 'application/json',
-    }
+    };
 }
 
 export { getDataFilm, getDataSequels };
