@@ -1,6 +1,6 @@
 @import "../common/common.sass"
 
-.filter-select
+.filter-select, .filter-range
   padding: 9px 7px
   border-radius: 5px
   border: 1px solid $black_default
@@ -50,3 +50,23 @@
   font-weight: 300
   cursor: pointer
   margin-top: 20px
+
+#slider
+  width: 90%
+  margin: 0 auto 10px auto
+
+.filter-range__content-inputs
+  display: flex
+  justify-content: space-between
+
+  label
+    width: 45%
+    font-size: 18px
+    line-height: 22px
+    font-family: 'Noto Sans', sans-serif
+    font-style: normal
+    font-weight: 300
+
+  input
+    box-sizing: border-box
+    width: 100%

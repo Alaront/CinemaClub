@@ -35,30 +35,28 @@
   font-style: normal
   font-weight: 500
   padding-right: 45px
-  cursor: pointer
+  display: flex
 
   +min-w($desktop)
     padding-right: 75px
 
-  &:after
-    content: ''
-    position: absolute
-    right: 0
-    top: 0
-    width: 37px
-    height: 18px
+  span
+    width: 59px
+    height: 30px
+    cursor: pointer
+    display: block
+    margin-left: 10px
+    box-sizing: border-box
 
-    +min-w($desktop)
-      width: 66px
-      height: 33px
-      top: -9px
+    &:hover
+      outline: 1px solid $red_default
+      box-sizing: border-box
 
-  &.min-card
-    &:after
+    &.search-result-sort__view-min
       background: url("./card-view-min.svg") 0 0 no-repeat
-      background-size: cover
+      background-size: contain
 
-  &.max-card
-    &:after
+    &.search-result-sort__view-max
       background: url("./card-view-max.svg") 0 0 no-repeat
-      background-size: cover
+      background-size: contain
+

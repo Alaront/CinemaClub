@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../../assets/filterSelect/filterSelect.sass'
 
 const FilterSelect = (props) => {
-    const {title = '', data = [], changeTypeFilm = Function.prototype, name = ''} = props;
+    const {title = '', initData = '', data = [], changeTypeFilm = Function.prototype, name = ''} = props;
 
     const [show, setShow] = useState(false);
 
@@ -18,7 +18,7 @@ const FilterSelect = (props) => {
 
             <div className="filter-select__form">
                 {
-                    data.map(item => <label key={item.value} className='filter-select__label'><input onChange={handleChange} type='radio' name={`filter${name}`} value={item.value}/>{item.name}</label>)
+                    data.map(item => <label key={item.value} className='filter-select__label'><input onChange={handleChange} checked={item.value === initData} type='radio' name={`filter${name}`} value={item.value}/>{item.name}</label>)
                 }
                 {
                     data.length > 5

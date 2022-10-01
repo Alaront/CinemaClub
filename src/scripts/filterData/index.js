@@ -610,3 +610,7 @@ export const filterCountriesData = [
         name: 'Палестина',
     },
 ];
+
+export const filterYearDataLimits = [1910, 2100];
+
+export const filterRatingDataLimits = [0, 10];
