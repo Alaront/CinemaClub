@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../assets/filterSelect/filterSelect.sass';
 
 const FilterSelect = (props) => {
@@ -9,8 +9,6 @@ const FilterSelect = (props) => {
     const handleChange = e => {
         changeTypeFilm(e.target.value);
     };
-
-
 
     return (
         <div className={`filter-select ${show ? 'filter-select-show' : ''}`}>
