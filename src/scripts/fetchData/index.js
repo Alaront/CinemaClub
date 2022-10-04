@@ -38,6 +38,14 @@ async function getDataSequels(id) {
         .catch(res => console.error(res));
 }
 
+async function getDataFilms(params) {
+    return await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films`, {
+        headers: getHeaders(),
+        params: {...params}
+    }).then(res => res)
+        .catch(res => console.error(res));
+}
+
 function getHeaders() {
     return {
         'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
@@ -45,4 +53,4 @@ function getHeaders() {
     };
 }
 
-export { getDataFilm, getDataSequels };
+export { getDataFilm, getDataSequels, getDataFilms };

@@ -8,38 +8,44 @@ import {
     filterGenresData,
     filterRatingDataLimits,
     filterTypeData,
-    filterYearDataLimits,
+    filterYearDataLimits, getUrlParams,
 } from '../scripts/filterData';
 import FilterRange from '../components/searchPage/FilterRange';
 import Pagination from '../components/searchPage/Pagination';
-import axios from "axios";
 import MoviePremiereTapeCard from "../components/MoviePremiereTapeCard";
+import {getDataFilms} from '../scripts/fetchData'
 
 const SearchPage = () => {
-    const [allFilms, setAllFilms] = useState([]);
-    const [searchName, setSearchName] = useState('Matrix');
-    const [typeFilm, setTypeFilm] = useState('ALL');
-    const [genresFilm, setGenresFilm] = useState(null);
-    const [countriesFilm, setCountriesFilm] = useState(null);
-    const [yearData, setYearData] = useState([1910, 2100]);
-    const [ratingData, setRatingData] = useState([0, 10]);
-    const [typeSort, setTypeSort] = useState('RATING');
-    const [typeView, setTypeView] = useState('min');
-    const [currentPageNumber, setCurrentPageNumber] = useState(1);
-    const [paginationAll, setPaginationAll] = useState(1);
-
     const filterType = filterTypeData;
     const filterGenres = filterGenresData;
     const filterCountries = filterCountriesData;
     const yearDataLimits = filterYearDataLimits;
     const ratingDataLimits = filterRatingDataLimits;
 
+    const [allFilms, setAllFilms] = useState([]);
+    const [typeView, setTypeView] = useState('min');
+    const [paginationAll, setPaginationAll] = useState(1);
+    const [searchTitle, setSearchTitle] = useState('');
+
+    const [searchParams, setSearchParams] = useState({
+        keyword: '',
+        type: 'ALL',
+        genres: null,
+        countries: null,
+        yearData: [1910, 2100],
+        ratingData: [0, 10],
+        order: 'RATING',
+        pagination: 1
+    })
+
     useEffect(() => {
-        startSearch();
-    }, [currentPageNumber])
+        if(window.location.href.includes('?')) {
+            searchAfterLoad();
+        };
+    }, [])
 
     const changeTypeSort = data => {
-        setTypeSort(data);
+        setSearchParams({...searchParams, order: data})
     };
 
     const changeTypeView = data => {
@@ -47,79 +53,112 @@ const SearchPage = () => {
     };
 
     const changeTypeFilm = data => {
-        setTypeFilm(data);
+        setSearchParams({...searchParams, type: data});
     };
 
     const changeGenresFilm = data => {
-        setGenresFilm(Number(data));
+        setSearchParams({...searchParams, genres: Number(data)});
     };
 
     const changeCountriesFilm = data => {
-        setCountriesFilm(Number(data));
+        setSearchParams({...searchParams, countries: Number(data)});
     };
 
     const changeYearData = data => {
-        setYearData(data);
+        setSearchParams(prevState => ({...prevState, yearData: data}));
     };
 
-    const changeRatingDataData = data => {
-        setRatingData(data);
+    const changeRatingData = data => {
+        setSearchParams(prevState => ({...prevState, ratingData: data}));
     };
 
     const changeCurrentPage = data => {
-        setCurrentPageNumber(data);
+        setSearchParams(prevState => ({...prevState, pagination: data}));
     };
 
     const changeSearchName = data => {
-        setSearchName(data)
-    }
+        setSearchParams({...searchParams, keyword: data});
+    };
+
+    const searchAfterLoad = async () => {
+        const objParams = getUrlParams();
+
+        const data = await getDataFilms({
+            order: objParams.order || 'RATING',
+            type: objParams.type || 'ALL',
+            ratingFrom: objParams.ratingFrom || 0,
+            ratingTo: objParams.ratingTo || 10,
+            yearFrom: objParams.yearFrom || 1910,
+            yearTo: objParams.yearTo || 2100,
+            genres: objParams.genres || null,
+            countries: objParams.countries || null,
+            keyword: objParams.keyword.trim() || '',
+            page: objParams.page || 1
+        });
+
+        changePagination(data);
+        changeUrl(data);
+        setSearchTitle(objParams.keyword.trim()  || '');
+
+        setSearchParams(prevState => ({
+            ...prevState,
+            keyword: objParams.keyword || '',
+            type: objParams.type || 'ALL',
+            genres: Number(objParams.genres) || null,
+            countries: Number(objParams.countries) || null,
+            yearData: [Number(objParams.yearFrom || 1910), Number(objParams.yearTo || 2100)],
+            ratingData: [Number(objParams.ratingFrom || 0), Number(objParams.ratingTo || 10)],
+            order: objParams.order || 'RATING',
+            pagination: objParams.page || 1,
+        }));
+    };
 
     const startSearch = async () => {
-        console.log('startSearch');
+        const data = await getDataFilms({
+            order: searchParams.order,
+            type: searchParams.type,
+            ratingFrom: searchParams.ratingData[0],
+            ratingTo: searchParams.ratingData[1],
+            yearFrom: searchParams.yearData[0],
+            yearTo: searchParams.yearData[1],
+            genres: searchParams.genres,
+            countries: searchParams.countries,
+            keyword: searchParams.keyword.trim(),
+            page: searchParams.pagination
+        })
 
-        const data = await axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films', {
-                        headers: {
-                            'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
-                            'Content-Type': 'application/json',
-                        },
-                        params: {
-                            order: typeSort,
-                            type: typeFilm,
-                            ratingFrom: ratingData[0],
-                            ratingTo: ratingData[1],
-                            yearFrom: yearData[0],
-                            yearTo: yearData[1],
-                            genres: genresFilm,
-                            countries: countriesFilm,
-                            page: currentPageNumber,
-                            keyword: searchName.trim()
-                        }
-                    }).then(res => res.data)
-                        .then(res => res)
-                        .catch(err => console.log(err))
 
-        console.log('data res', data)
+        changePagination(data);
+        changeUrl(data);
+        setSearchTitle(searchParams.keyword.trim())
+    };
 
-        setPaginationAll(data.totalPages)
-        setAllFilms(data.items)
+    const changePagination = data => {
+        setPaginationAll(data.data.totalPages);
+        setAllFilms(data.data.items);
+    }
+
+    const changeUrl = data => {
+        let newUrl = window.location.protocol + '//' + window.location.host + document.location.pathname + data.request.responseURL.slice('https://kinopoiskapiunofficial.tech/api/v2.2/films'.length);
+        window.history.replaceState("", "", newUrl);
     }
 
     return (
         <main className='container content search-page'>
-            <FormSearchMain changeSearchName={changeSearchName} searchName={searchName} startSearch={startSearch} />
+            <FormSearchMain changeSearchName={changeSearchName} searchName={searchParams.keyword} startSearch={startSearch} />
 
             <div className='search-page__content'>
                 <div className='search-page__filter'>
-                    <FilterSelect title={'Тип'} data={filterType} initData={typeFilm} name={'_type'} changeTypeFilm={changeTypeFilm}/>
-                    <FilterSelect title={'Жанр'} data={filterGenres} initData={genresFilm} name={'_genres'} changeTypeFilm={changeGenresFilm}/>
-                    <FilterSelect title={'Страна'} data={filterCountries} initData={countriesFilm} name={'_countries'} changeTypeFilm={changeCountriesFilm}/>
-                    <FilterRange title={'Год'} data={yearData} dataLimits={yearDataLimits} changeYearData={changeYearData}/>
-                    <FilterRange title={'Рейтинг'} data={ratingData} dataLimits={ratingDataLimits} changeYearData={changeRatingDataData}/>
+                    <FilterSelect title={'Тип'} data={filterType} initData={searchParams.type} name={'_type'} changeTypeFilm={changeTypeFilm}/>
+                    <FilterSelect title={'Жанр'} data={filterGenres} initData={searchParams.genres} name={'_genres'} changeTypeFilm={changeGenresFilm}/>
+                    <FilterSelect title={'Страна'} data={filterCountries} initData={searchParams.countries} name={'_countries'} changeTypeFilm={changeCountriesFilm}/>
+                    <FilterRange title={'Год'} data={searchParams.yearData} dataLimits={yearDataLimits} changeYearData={changeYearData}/>
+                    <FilterRange title={'Рейтинг'} data={searchParams.ratingData} dataLimits={ratingDataLimits} changeYearData={changeRatingData}/>
                 </div>
                 <div className='search-page__result'>
                     <div className='search-page__result-wrapper'>
-                        <h2 className='search-page__title'>Поиск по:  {searchName}</h2>
-                        <SearchResultSort typeSort={typeSort} changeTypeSort={changeTypeSort} changeTypeView={changeTypeView}/>
+                        <h2 className='search-page__title'>Поиск по:  {searchTitle}</h2>
+                        <SearchResultSort typeSort={searchParams.order} changeTypeSort={changeTypeSort} changeTypeView={changeTypeView}/>
                         <div className='search-page__result-carts'>
                             {
                                 allFilms.map(item => <MoviePremiereTapeCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId}  countries={item.countries[0].country} year={item.year}/>)
@@ -127,7 +166,7 @@ const SearchPage = () => {
                         </div>
                     </div>
                     <div className='search-page__result-pagination'>
-                        <Pagination paginationAll={paginationAll} currentPageNumber={currentPageNumber} changeCurrentPage={changeCurrentPage}/>
+                        <Pagination paginationAll={paginationAll} currentPageNumber={searchParams.pagination} changeCurrentPage={changeCurrentPage}/>
                     </div>
                 </div>
             </div>

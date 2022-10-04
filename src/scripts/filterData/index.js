@@ -614,3 +614,18 @@ export const filterCountriesData = [
 export const filterYearDataLimits = [1910, 2100];
 
 export const filterRatingDataLimits = [0, 10];
+
+export const getUrlParams = () => {
+    if(!window.location.href.includes('?')) return {}
+
+    const arrayParams = window.location.href.slice(`${window.location.protocol + '//' + window.location.host + document.location.pathname}`.length + 1).split('&');
+
+    const objParams = {};
+
+    arrayParams.forEach(item => {
+        const data = item.split("=")
+        objParams[data[0]] = data[1];
+    })
+
+    return objParams;
+}
