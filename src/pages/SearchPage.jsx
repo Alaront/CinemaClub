@@ -3,6 +3,7 @@ import FormSearchMain from '../components/searchPage/FormSearchMain';
 import '../assets/searchPage/searchPage.sass';
 import SearchResultSort from '../components/searchPage/searchResultSort';
 import FilterSelect from '../components/searchPage/FilterSelect';
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {
     filterCountriesData,
     filterGenresData,
@@ -84,9 +85,12 @@ const SearchPage = () => {
 
     const searchAfterLoad = async () => {
         const objParams = getUrlParams();
+        const cyrillicToTranslit = new CyrillicToTranslit();
+        const newKeyword = window.location.href.includes('&RU=change') ? cyrillicToTranslit.reverse(objParams.keyword.replace(/#/g, " ") || "") : objParams.keyword.replace(/#/g, " ")
 
         setSearchIs(true);
-        const data = await getDataFilms({
+
+        const params = {
             order: objParams.order || 'RATING',
             type: objParams.type || 'ALL',
             ratingFrom: objParams.ratingFrom || 0,
@@ -95,18 +99,20 @@ const SearchPage = () => {
             yearTo: objParams.yearTo || 2100,
             genres: objParams.genres || null,
             countries: objParams.countries || null,
-            keyword: objParams.keyword.trim().replace(/#/g, " ") || '',
+            keyword: newKeyword,
             page: objParams.page || 1
-        });
+        }
+
+        const data = await getDataFilms(params);
 
         setSearchIs(false);
         changePagination(data);
-        changeUrl(data);
-        setSearchTitle(objParams.keyword.trim().replace(/#/g, " ")  || '');
+        changeUrl(data, params);
+        setSearchTitle(newKeyword);
 
         setSearchParams(prevState => ({
             ...prevState,
-            keyword: objParams.keyword.replace(/#/g, " ") || '',
+            keyword: newKeyword,
             type: objParams.type || 'ALL',
             genres: Number(objParams.genres) || null,
             countries: Number(objParams.countries) || null,
@@ -119,7 +125,8 @@ const SearchPage = () => {
 
     const startSearch = async () => {
         setSearchIs(true);
-        const data = await getDataFilms({
+
+        const params = {
             order: searchParams.order,
             type: searchParams.type,
             ratingFrom: searchParams.ratingData[0],
@@ -130,11 +137,13 @@ const SearchPage = () => {
             countries: searchParams.countries,
             keyword: searchParams.keyword.trim().replace(/\+/g, " "),
             page: searchParams.pagination
-        })
+        }
+
+        const data = await getDataFilms(params)
 
         setSearchIs(false);
         changePagination(data);
-        changeUrl(data);
+        changeUrl(data, params);
         setSearchTitle(searchParams.keyword.trim().replace(/\+/g, " "))
     };
 
@@ -143,8 +152,28 @@ const SearchPage = () => {
         setAllFilms(data.data.items);
     }
 
-    const changeUrl = data => {
-        let newUrl = window.location.protocol + '//' + window.location.host + document.location.pathname + data.request.responseURL.slice('https://kinopoiskapiunofficial.tech/api/v2.2/films'.length);
+    const buildRequestParams = (params) => {
+        const allKeys = Object.keys(params);
+
+        let strParams = '?';
+
+        allKeys.forEach(item => {
+            if(params[item]) {
+                strParams += '&' + item + '=' + params[item];
+            }
+        })
+
+        return strParams
+    }
+
+    const changeUrl = (data, params) => {
+        const cyrillicToTranslit = new CyrillicToTranslit();
+
+        let newUrl = window.location.origin + document.location.pathname + buildRequestParams(params).replace(/ /g, "#");
+        if (/[а-яА-ЯЁё]/.test(newUrl)) {
+            newUrl = cyrillicToTranslit.transform(newUrl + '&RU=change', '_');
+        };
+
         window.history.replaceState("", "", newUrl.replace(/\+/g, "#"));
     }
 

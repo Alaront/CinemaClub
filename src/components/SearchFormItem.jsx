@@ -1,9 +1,17 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
 
 const SearchFormItem = ({pathPage, title, year, posterUrl}) => {
     const buildUrl = () => {
-        return `/films?keyword=${title}&yearTo=${year}`.replace(/ /g, "#");
+        const cyrillicToTranslit = new CyrillicToTranslit();
+        let newPath = `/films?keyword=${title}&yearTo=${year}`.replace(/ /g, "#");
+
+        if (/[а-яА-ЯЁё]/.test(newPath)) {
+            newPath = cyrillicToTranslit.transform(newPath + '&RU=change', '_');
+        };
+
+        return newPath;
     }
 
     return (
