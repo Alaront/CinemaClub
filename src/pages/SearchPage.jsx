@@ -14,6 +14,7 @@ import FilterRange from '../components/searchPage/FilterRange';
 import Pagination from '../components/searchPage/Pagination';
 import MoviePremiereTapeCard from "../components/MoviePremiereTapeCard";
 import {getDataFilms} from '../scripts/fetchData'
+import Preloader from "../UI/Preloader";
 
 const SearchPage = () => {
     const filterType = filterTypeData;
@@ -24,6 +25,7 @@ const SearchPage = () => {
 
     const [allFilms, setAllFilms] = useState([]);
     const [typeView, setTypeView] = useState('min');
+    const [searchIs, setSearchIs] = useState(false);
     const [paginationAll, setPaginationAll] = useState(1);
     const [searchTitle, setSearchTitle] = useState('');
 
@@ -83,6 +85,7 @@ const SearchPage = () => {
     const searchAfterLoad = async () => {
         const objParams = getUrlParams();
 
+        setSearchIs(true);
         const data = await getDataFilms({
             order: objParams.order || 'RATING',
             type: objParams.type || 'ALL',
@@ -96,6 +99,7 @@ const SearchPage = () => {
             page: objParams.page || 1
         });
 
+        setSearchIs(false);
         changePagination(data);
         changeUrl(data);
         setSearchTitle(objParams.keyword.trim()  || '');
@@ -114,6 +118,7 @@ const SearchPage = () => {
     };
 
     const startSearch = async () => {
+        setSearchIs(true);
         const data = await getDataFilms({
             order: searchParams.order,
             type: searchParams.type,
@@ -127,7 +132,7 @@ const SearchPage = () => {
             page: searchParams.pagination
         })
 
-
+        setSearchIs(false);
         changePagination(data);
         changeUrl(data);
         setSearchTitle(searchParams.keyword.trim())
@@ -161,7 +166,9 @@ const SearchPage = () => {
                         <SearchResultSort typeSort={searchParams.order} changeTypeSort={changeTypeSort} changeTypeView={changeTypeView}/>
                         <div className='search-page__result-carts'>
                             {
-                                allFilms.map(item => <MoviePremiereTapeCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId}  countries={item.countries[0].country} year={item.year}/>)
+                                searchIs
+                                ? <Preloader />
+                                : allFilms.map(item => <MoviePremiereTapeCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId}  countries={item.countries[0].country} year={item.year}/>)
                             }
                         </div>
                     </div>

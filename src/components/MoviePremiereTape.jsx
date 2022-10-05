@@ -3,9 +3,11 @@ import {Link} from 'react-router-dom';
 import '../assets/moviePremiereTape/moviePremiereTape.sass';
 import MoviePremiereTapeCard from './MoviePremiereTapeCard';
 import axios from 'axios';
+import Preloader from "../UI/Preloader";
 
 const MoviePremiereTape = () => {
     const [tapeData, setTapeData] = useState([]);
+    const [isSearch, setIsSearch] = useState(true);
 
     useEffect(() => {
         axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2022&month=JANUARY', {
@@ -14,7 +16,10 @@ const MoviePremiereTape = () => {
                 'Content-Type': 'application/json',
             },
         }).then(res => res.data)
-            .then(res => setTapeData(res.items.slice(0, 8)))
+            .then(res => {
+                setTapeData(res.items.slice(0, 8));
+                setIsSearch(false);
+            })
             .catch(error => console.error(error));
     }, []);
 
@@ -26,8 +31,9 @@ const MoviePremiereTape = () => {
             </div>
             <div className='movie-premiere-tape__wrapper-card'>
                 {
-                    tapeData
-                        ? tapeData.map(item => <MoviePremiereTapeCard posterUrl={item.posterUrl} puthPage={item.kinopoiskId} nameRu={item.nameRu} key={item.kinopoiskId} />) : <></>
+                    isSearch
+                    ? <Preloader />
+                    : tapeData.map(item => <MoviePremiereTapeCard posterUrl={item.posterUrl} puthPage={item.kinopoiskId} nameRu={item.nameRu} key={item.kinopoiskId} />)
                 }
             </div>
         </div>

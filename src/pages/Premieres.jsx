@@ -4,10 +4,12 @@ import '../assets/premieres.sass';
 import {useEffect} from 'react';
 import axios from 'axios';
 import MoviePremiereTapeCard from '../components/MoviePremiereTapeCard';
+import Preloader from "../UI/Preloader";
 
 const Premieres = () => {
     const dataRef = useRef('');
     const [dataFilms, setDataFilms] = useState([]);
+    const [isSearch, setIsSearch] = useState(true);
 
     const getParams = () => {
         const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -20,7 +22,7 @@ const Premieres = () => {
     };
 
     const getData = () => {
-
+        setIsSearch(true);
         axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres', {
             headers: {
                 'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
@@ -30,7 +32,10 @@ const Premieres = () => {
                 ...getParams(),
             },
         }).then(res => res.data)
-            .then(res => setDataFilms(res.items))
+            .then(res => {
+                setDataFilms(res.items)
+                setIsSearch(false)
+            })
             .catch(error => console.error(error));
     };
 
@@ -51,8 +56,9 @@ const Premieres = () => {
             </form>
             <div className='premieres__content'>
                 {
-                    dataFilms.length  ?
-                        dataFilms.map(item => <MoviePremiereTapeCard key={item.kinopoiskId} countries={item.countries[0].country} year={item.year} posterUrl={item.posterUrl} nameRu={item.nameRu ? item.nameRu : item.nameEn} puthPage={item.kinopoiskId}/>) : <></>
+                    isSearch
+                    ? <Preloader />
+                    : dataFilms.map(item => <MoviePremiereTapeCard key={item.kinopoiskId} countries={item.countries[0].country} year={item.year} posterUrl={item.posterUrl} nameRu={item.nameRu ? item.nameRu : item.nameEn} puthPage={item.kinopoiskId}/>)
                 }
             </div>
         </main>
