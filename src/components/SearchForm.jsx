@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import '../assets/searchForm/searchForm.sass';
 import debounce from 'lodash.debounce';
-import axios from 'axios';
 import SearchFormItem from './SearchFormItem';
+import {getSearchFilmHome} from "../scripts/fetchData";
 
 const SearchForm = () => {
     const [filmName, setFilmName] = useState('');
@@ -12,22 +12,12 @@ const SearchForm = () => {
         searchFilm();
     }, [filmName]);
 
-    const startSearch = () => {
+    const startSearch = async () => {
         const name = filmName.trim();
         if(!name) return;
 
-        axios.get('https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword', {
-            params: {
-                keyword: name,
-                page: 1,
-            },
-            headers: {
-                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
-                'Content-Type': 'application/json',
-            },
-        }).then(res => res.data)
-            .then(res => setAllFilms(res.films))
-            .catch(res => console.error(res));
+        const {films} = await getSearchFilmHome(name);
+        setAllFilms(films);
     };
 
     const searchFilm = debounce(startSearch, 1000);
@@ -49,7 +39,8 @@ const SearchForm = () => {
                                 {allFilms.map(item => <SearchFormItem key={item.filmId} pathPage={item.filmId}
                                     title={item.nameRu ? item.nameRu : item.nameEn}
                                     year={item.year} posterUrl={item.posterUrl}/>)
-                                }                            </div>
+                                }
+                            </div>
                         ) : <></>
                 }
             </div>

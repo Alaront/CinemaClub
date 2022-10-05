@@ -2,9 +2,9 @@ import React, {useRef, useState} from 'react';
 import '../assets/main.sass';
 import '../assets/premieres.sass';
 import {useEffect} from 'react';
-import axios from 'axios';
 import MoviePremiereTapeCard from '../components/MoviePremiereTapeCard';
 import Preloader from "../UI/Preloader";
+import {getDataPremiereFilms} from "../scripts/fetchData";
 
 const Premieres = () => {
     const dataRef = useRef('');
@@ -21,22 +21,12 @@ const Premieres = () => {
         };
     };
 
-    const getData = () => {
+    const getData = async () => {
         setIsSearch(true);
-        axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres', {
-            headers: {
-                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
-                'Content-Type': 'application/json',
-            },
-            params: {
-                ...getParams(),
-            },
-        }).then(res => res.data)
-            .then(res => {
-                setDataFilms(res.items)
-                setIsSearch(false)
-            })
-            .catch(error => console.error(error));
+        const dataParams = getParams();
+        const {data} = await getDataPremiereFilms(dataParams);
+        setDataFilms(data.items);
+        setIsSearch(false);
     };
 
     useEffect(() => {

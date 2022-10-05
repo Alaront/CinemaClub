@@ -1,4 +1,5 @@
 import axios from 'axios';
+import MoviePremiereTape from "../../components/MoviePremiereTape";
 
 async function getDataFilm(id) {
     const film = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, {
@@ -46,6 +47,25 @@ async function getDataFilms(params) {
         .catch(res => console.error(res));
 }
 
+async function getDataPremiereFilms(params) {
+    return await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres`, {
+        headers: getHeaders(),
+        params: {...params}
+    }).then(res => res)
+        .catch(res => console.error(res));
+}
+
+async function getSearchFilmHome(name) {
+    return await axios.get('https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword', {
+        headers: getHeaders(),
+        params: {
+            keyword: name,
+            page: 1,
+        },
+    }).then(res => res.data)
+        .catch(res => console.error(res));
+}
+
 function getHeaders() {
     return {
         'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
@@ -53,4 +73,4 @@ function getHeaders() {
     };
 }
 
-export { getDataFilm, getDataSequels, getDataFilms };
+export { getDataFilm, getDataSequels, getDataFilms, getDataPremiereFilms, getSearchFilmHome };

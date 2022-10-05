@@ -2,26 +2,33 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import '../assets/moviePremiereTape/moviePremiereTape.sass';
 import MoviePremiereTapeCard from './MoviePremiereTapeCard';
-import axios from 'axios';
 import Preloader from "../UI/Preloader";
+import {getDataPremiereFilms} from "../scripts/fetchData";
 
 const MoviePremiereTape = () => {
     const [tapeData, setTapeData] = useState([]);
     const [isSearch, setIsSearch] = useState(true);
 
     useEffect(() => {
-        axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2022&month=JANUARY', {
-            headers: {
-                'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
-                'Content-Type': 'application/json',
-            },
-        }).then(res => res.data)
-            .then(res => {
-                setTapeData(res.items.slice(0, 8));
-                setIsSearch(false);
-            })
-            .catch(error => console.error(error));
+        getData();
     }, []);
+
+    const getParams = () => {
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const date = new Date();
+
+        return {
+            month: monthNames[date.getMonth()].toUpperCase(),
+            year: date.getFullYear(),
+        };
+    };
+
+    const getData = async () => {
+        const dataParams = getParams();
+        const {data} = await getDataPremiereFilms(dataParams);
+        setTapeData(data.items.slice(0, 8));
+        setIsSearch(false);
+    }
 
     return (
         <div className='movie-premiere-tape'>
