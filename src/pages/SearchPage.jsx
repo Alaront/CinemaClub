@@ -95,18 +95,18 @@ const SearchPage = () => {
             yearTo: objParams.yearTo || 2100,
             genres: objParams.genres || null,
             countries: objParams.countries || null,
-            keyword: objParams.keyword.trim() || '',
+            keyword: objParams.keyword.trim().replace(/#/g, " ") || '',
             page: objParams.page || 1
         });
 
         setSearchIs(false);
         changePagination(data);
         changeUrl(data);
-        setSearchTitle(objParams.keyword.trim()  || '');
+        setSearchTitle(objParams.keyword.trim().replace(/#/g, " ")  || '');
 
         setSearchParams(prevState => ({
             ...prevState,
-            keyword: objParams.keyword || '',
+            keyword: objParams.keyword.replace(/#/g, " ") || '',
             type: objParams.type || 'ALL',
             genres: Number(objParams.genres) || null,
             countries: Number(objParams.countries) || null,
@@ -128,14 +128,14 @@ const SearchPage = () => {
             yearTo: searchParams.yearData[1],
             genres: searchParams.genres,
             countries: searchParams.countries,
-            keyword: searchParams.keyword.trim(),
+            keyword: searchParams.keyword.trim().replace(/\+/g, " "),
             page: searchParams.pagination
         })
 
         setSearchIs(false);
         changePagination(data);
         changeUrl(data);
-        setSearchTitle(searchParams.keyword.trim())
+        setSearchTitle(searchParams.keyword.trim().replace(/\+/g, " "))
     };
 
     const changePagination = data => {
@@ -145,7 +145,7 @@ const SearchPage = () => {
 
     const changeUrl = data => {
         let newUrl = window.location.protocol + '//' + window.location.host + document.location.pathname + data.request.responseURL.slice('https://kinopoiskapiunofficial.tech/api/v2.2/films'.length);
-        window.history.replaceState("", "", newUrl);
+        window.history.replaceState("", "", newUrl.replace(/\+/g, "#"));
     }
 
     return (
