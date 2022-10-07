@@ -13,10 +13,10 @@ import {
 } from '../scripts/filterData';
 import FilterRange from '../components/searchPage/FilterRange';
 import Pagination from '../components/searchPage/Pagination';
-import MovieCard from "../components/filmCards/MovieCard";
-import {getDataFilms} from '../scripts/fetchData'
-import Preloader from "../UI/Preloader";
-import MovieCardFull from "../components/filmCards/MovieCardFull";
+import MovieCard from '../components/filmCards/MovieCard';
+import {getDataFilms} from '../scripts/fetchData';
+import Preloader from '../UI/Preloader';
+import MovieCardFull from '../components/filmCards/MovieCardFull';
 
 const SearchPage = () => {
     const filterType = filterTypeData;
@@ -40,17 +40,17 @@ const SearchPage = () => {
         yearData: [1910, 2100],
         ratingData: [0, 10],
         order: 'RATING',
-        pagination: 1
-    })
+        pagination: 1,
+    });
 
     useEffect(() => {
         if(window.location.href.includes('?')) {
             searchAfterLoad();
         };
-    }, [])
+    }, []);
 
     const changeTypeSort = data => {
-        setSearchParams({...searchParams, order: data})
+        setSearchParams({...searchParams, order: data});
     };
 
     const changeTypeView = data => {
@@ -89,7 +89,7 @@ const SearchPage = () => {
         const objParams = getUrlParams();
         const cyrillicToTranslit = new CyrillicToTranslit();
         const keywordParams = objParams.keyword || '';
-        const newKeyword = window.location.href.includes('&RU=change') ? cyrillicToTranslit.reverse(keywordParams.replace(/#/g, " ")) : keywordParams.replace(/#/g, " ")
+        const newKeyword = window.location.href.includes('&RU=change') ? cyrillicToTranslit.reverse(keywordParams.replace(/#/g, ' ')) : keywordParams.replace(/#/g, ' ');
 
         setSearchIs(true);
 
@@ -103,8 +103,8 @@ const SearchPage = () => {
             genres: objParams.genres || null,
             countries: objParams.countries || null,
             keyword: newKeyword,
-            page: objParams.page || 1
-        }
+            page: objParams.page || 1,
+        };
 
         const data = await getDataFilms(params);
 
@@ -138,22 +138,22 @@ const SearchPage = () => {
             yearTo: searchParams.yearData[1],
             genres: searchParams.genres,
             countries: searchParams.countries,
-            keyword: searchParams.keyword.trim().replace(/\+/g, " "),
-            page: searchParams.pagination
-        }
+            keyword: searchParams.keyword.trim().replace(/\+/g, ' '),
+            page: searchParams.pagination,
+        };
 
-        const data = await getDataFilms(params)
+        const data = await getDataFilms(params);
 
         setSearchIs(false);
         changePagination(data);
         changeUrl(data, params);
-        setSearchTitle(searchParams.keyword.trim().replace(/\+/g, " "))
+        setSearchTitle(searchParams.keyword.trim().replace(/\+/g, ' '));
     };
 
     const changePagination = data => {
         setPaginationAll(data.data.totalPages);
         setAllFilms(data.data.items);
-    }
+    };
 
     const buildRequestParams = (params) => {
         const allKeys = Object.keys(params);
@@ -164,21 +164,21 @@ const SearchPage = () => {
             if(params[item]) {
                 strParams += '&' + item + '=' + params[item];
             }
-        })
+        });
 
-        return strParams
-    }
+        return strParams;
+    };
 
     const changeUrl = (data, params) => {
         const cyrillicToTranslit = new CyrillicToTranslit();
 
-        let newUrl = window.location.origin + document.location.pathname + buildRequestParams(params).replace(/ /g, "#");
+        let newUrl = window.location.origin + document.location.pathname + buildRequestParams(params).replace(/ /g, '#');
         if (/[а-яА-ЯЁё]/.test(newUrl)) {
             newUrl = cyrillicToTranslit.transform(newUrl + '&RU=change', '_');
         };
 
-        window.history.replaceState("", "", newUrl.replace(/\+/g, "#"));
-    }
+        window.history.replaceState('', '', newUrl.replace(/\+/g, '#'));
+    };
 
     return (
         <main className='container content search-page'>
@@ -199,10 +199,10 @@ const SearchPage = () => {
                         <div className='search-page__result-carts'>
                             {
                                 searchIs
-                                ? <Preloader />
-                                : typeView === 'min'
-                                    ? allFilms.map(item => <MovieCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries[0].country} year={item.year}/>)
-                                    : allFilms.map(item => <MovieCardFull key={item.kinopoiskId} genres={item.genres} posterUrl={item.posterUrl} puthPage={item.kinopoiskId} ratingKinopoisk={item.ratingKinopoisk} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries} year={item.year} />)
+                                    ? <Preloader />
+                                    : typeView === 'min'
+                                        ? allFilms.map(item => <MovieCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries[0].country} year={item.year}/>)
+                                        : allFilms.map(item => <MovieCardFull key={item.kinopoiskId} genres={item.genres} posterUrl={item.posterUrl} puthPage={item.kinopoiskId} ratingKinopoisk={item.ratingKinopoisk} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries} year={item.year} />)
                             }
                         </div>
                     </div>
@@ -210,7 +210,7 @@ const SearchPage = () => {
                         <Pagination paginationAll={paginationAll} currentPageNumber={searchParams.pagination} changeCurrentPage={changeCurrentPage}/>
                     </div>
                 </div>
-                <div className="search-page__show-menu-btn" onClick={() => setMenuShow(!menuShow)}>
+                <div className='search-page__show-menu-btn' onClick={() => setMenuShow(!menuShow)}>
                     <span></span>
                     <span></span>
                     <span></span>

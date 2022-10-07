@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../assets/searchForm/searchForm.sass';
 import debounce from 'lodash.debounce';
 import SearchFormItem from './SearchFormItem';
-import {getSearchFilmHome} from "../scripts/fetchData";
+import {getSearchFilmHome} from '../scripts/fetchData';
 
 const SearchForm = () => {
     const [filmName, setFilmName] = useState('');

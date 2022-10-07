@@ -43,8 +43,6 @@ const FilterRange = (props) => {
     };
 
     const changeInputData = (type, e) => {
-        console.log('changeInputData');
-
         const newDataInput = Number(e.target.value.replace(/[^0-9\.]/g, ''));
 
         if(type === 'min') {

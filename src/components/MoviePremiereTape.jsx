@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import '../assets/filmCards/filmCard.sass';
 import MovieCard from './filmCards/MovieCard';
-import Preloader from "../UI/Preloader";
-import {getDataPremiereFilms} from "../scripts/fetchData";
+import Preloader from '../UI/Preloader';
+import {getDataPremiereFilms} from '../scripts/fetchData';
 
 const MoviePremiereTape = () => {
     const [tapeData, setTapeData] = useState([]);
@@ -28,7 +28,7 @@ const MoviePremiereTape = () => {
         const {data} = await getDataPremiereFilms(dataParams);
         setTapeData(data.items.slice(0, 8));
         setIsSearch(false);
-    }
+    };
 
     return (
         <div className='movie-premiere-tape'>
@@ -39,8 +39,8 @@ const MoviePremiereTape = () => {
             <div className='movie-premiere-tape__wrapper-card'>
                 {
                     isSearch
-                    ? <Preloader />
-                    : tapeData.map(item => <MovieCard posterUrl={item.posterUrl} puthPage={item.kinopoiskId} nameRu={item.nameRu} key={item.kinopoiskId} />)
+                        ? <Preloader />
+                        : tapeData.map(item => <MovieCard posterUrl={item.posterUrl} puthPage={item.kinopoiskId} nameRu={item.nameRu} key={item.kinopoiskId} />)
                 }
             </div>
         </div>

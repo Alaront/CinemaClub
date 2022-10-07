@@ -1,5 +1,4 @@
 import axios from 'axios';
-import MoviePremiereTape from "../../components/MoviePremiereTape";
 
 async function getDataFilm(id) {
     const film = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, {
@@ -7,7 +6,7 @@ async function getDataFilm(id) {
 
     }).then(res => res.data)
         .then(res => res)
-        .catch(res => console.error(res));
+        .catch(res => console.error(res)); /* eslint-disable-line */
 
     const screen = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images`, {
         headers: getHeaders(),
@@ -18,14 +17,14 @@ async function getDataFilm(id) {
         },
     }).then(res => res.data)
         .then(res => res.items)
-        .catch(res => console.error(res));
+        .catch(res => console.error(res)); /* eslint-disable-line */
 
     const similars = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/similars`, {
         headers: getHeaders(),
 
     }).then(res => res.data)
         .then(res => res.items)
-        .catch(res => console.error(res));
+        .catch(res => console.error(res)); /* eslint-disable-line */
 
 
     return {film, screen, similars};
@@ -36,23 +35,23 @@ async function getDataSequels(id) {
         headers: getHeaders(),
     }).then(res => res.data)
         .then(res => res)
-        .catch(res => console.error(res));
+        .catch(res => console.error(res)); /* eslint-disable-line */
 }
 
 async function getDataFilms(params) {
-    return await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films`, {
+    return await axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films', {
         headers: getHeaders(),
-        params: {...params}
+        params: {...params},
     }).then(res => res)
-        .catch(res => console.error(res));
+        .catch(res => console.error(res)); /* eslint-disable-line */
 }
 
 async function getDataPremiereFilms(params) {
-    return await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres`, {
+    return await axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres', {
         headers: getHeaders(),
-        params: {...params}
+        params: {...params},
     }).then(res => res)
-        .catch(res => console.error(res));
+        .catch(res => console.error(res)); /* eslint-disable-line */
 }
 
 async function getSearchFilmHome(name) {
@@ -63,7 +62,7 @@ async function getSearchFilmHome(name) {
             page: 1,
         },
     }).then(res => res.data)
-        .catch(res => console.error(res));
+        .catch(res => console.error(res)); /* eslint-disable-line */
 }
 
 function getHeaders() {

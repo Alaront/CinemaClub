@@ -4,7 +4,7 @@ import '../assets/filmPage/filmPage.sass';
 import SequelsPrequels from '../components/SequelsPrequels';
 import SliderComponent from '../components/Slider/SliderComponent';
 import {getDataFilm} from '../scripts/fetchData';
-import {markupData} from "../scripts/filterData";
+import {markupData} from '../scripts/filterData';
 
 const FilmPage = () => {
     const {id} = useParams();
