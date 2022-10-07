@@ -30,6 +30,7 @@ const SearchPage = () => {
     const [searchIs, setSearchIs] = useState(false);
     const [paginationAll, setPaginationAll] = useState(1);
     const [searchTitle, setSearchTitle] = useState('');
+    const [menuShow, setMenuShow] = useState(false);
 
     const [searchParams, setSearchParams] = useState({
         keyword: '',
@@ -88,7 +89,7 @@ const SearchPage = () => {
         const objParams = getUrlParams();
         const cyrillicToTranslit = new CyrillicToTranslit();
         const keywordParams = objParams.keyword || '';
-        const newKeyword = window.location.href.includes('&RU=change') ? cyrillicToTranslit.reverse(keywordParams || "") : keywordParams.replace(/#/g, " ")
+        const newKeyword = window.location.href.includes('&RU=change') ? cyrillicToTranslit.reverse(keywordParams.replace(/#/g, " ")) : keywordParams.replace(/#/g, " ")
 
         setSearchIs(true);
 
@@ -183,7 +184,7 @@ const SearchPage = () => {
         <main className='container content search-page'>
             <FormSearchMain changeSearchName={changeSearchName} searchName={searchParams.keyword} startSearch={startSearch} />
 
-            <div className='search-page__content'>
+            <div className={`search-page__content ${menuShow ? 'show__menu' : ''}`}>
                 <div className='search-page__filter'>
                     <FilterSelect title={'Тип'} data={filterType} initData={searchParams.type} name={'_type'} changeTypeFilm={changeTypeFilm}/>
                     <FilterSelect title={'Жанр'} data={filterGenres} initData={searchParams.genres} name={'_genres'} changeTypeFilm={changeGenresFilm}/>
@@ -208,6 +209,11 @@ const SearchPage = () => {
                     <div className='search-page__result-pagination'>
                         <Pagination paginationAll={paginationAll} currentPageNumber={searchParams.pagination} changeCurrentPage={changeCurrentPage}/>
                     </div>
+                </div>
+                <div className="search-page__show-menu-btn" onClick={() => setMenuShow(!menuShow)}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </main>

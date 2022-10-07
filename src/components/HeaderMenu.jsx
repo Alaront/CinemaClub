@@ -18,7 +18,7 @@ const HeaderMenu = () => {
             <nav className={`menu__links ${openMenu ? 'show' : ''}`}>
                 <ul>
                     <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='/'>Главная</Link></li>
-                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Поиск</Link></li>
+                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='/films'>Поиск</Link></li>
                     <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Новости</Link></li>
                     <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Рецензии</Link></li>
                     <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Топы</Link></li>
