@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import '../assets/main.sass';
 import '../assets/premieres.sass';
 import {useEffect} from 'react';
-import MoviePremiereTapeCard from '../components/MoviePremiereTapeCard';
+import MovieCard from '../components/filmCards/MovieCard';
 import Preloader from "../UI/Preloader";
 import {getDataPremiereFilms} from "../scripts/fetchData";
 
@@ -48,7 +48,7 @@ const Premieres = () => {
                 {
                     isSearch
                     ? <Preloader />
-                    : dataFilms.map(item => <MoviePremiereTapeCard key={item.kinopoiskId} countries={item.countries[0].country} year={item.year} posterUrl={item.posterUrl} nameRu={item.nameRu ? item.nameRu : item.nameEn} puthPage={item.kinopoiskId}/>)
+                    : dataFilms.map(item => <MovieCard key={item.kinopoiskId} countries={item.countries[0].country} year={item.year} posterUrl={item.posterUrl} nameRu={item.nameRu ? item.nameRu : item.nameEn} puthPage={item.kinopoiskId}/>)
                 }
             </div>
         </main>

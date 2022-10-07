@@ -5,7 +5,7 @@ import '../../assets/slider/slider.sass';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import SliderComponentItemPhoto from './SliderComponentItemPhoto';
-import MoviePremiereTapeCard from '../MoviePremiereTapeCard';
+import MovieCard from '../filmCards/MovieCard';
 
 const SliderComponent = (props) => {
     const {data = [], sliderType, viewArray, spaceBetween} = props;
@@ -45,7 +45,7 @@ const SliderComponent = (props) => {
                         sliderType === 'photo' ? data.map(item => <SwiperSlide key={item.imageUrl}> <SliderComponentItemPhoto dataSrc={item.imageUrl} /> </SwiperSlide>): <></>
                     }
                     {
-                        sliderType === 'card' ? data.map(item =><SwiperSlide key={item.filmId}> <MoviePremiereTapeCard puthPage={item.filmId} posterUrl={item.posterUrlPreview} nameRu={item.nameRu} /></SwiperSlide>): <></>
+                        sliderType === 'card' ? data.map(item =><SwiperSlide key={item.filmId}> <MovieCard puthPage={item.filmId} posterUrl={item.posterUrlPreview} nameRu={item.nameRu} /></SwiperSlide>): <></>
                     }
 
                 </div>

@@ -629,3 +629,13 @@ export const getUrlParams = () => {
 
     return objParams;
 }
+
+export const markupData = (data, key) => {
+    let markupStr = '';
+
+    data.forEach(item => {
+        markupStr += ` ${item[key]},`;
+    });
+
+    return markupStr.substring(0, markupStr.length - 1);
+};

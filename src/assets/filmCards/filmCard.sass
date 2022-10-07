@@ -131,3 +131,83 @@
   flex-wrap: wrap
   gap: 45px 35px
 
+
+.movie-card-full
+  width: 100%
+  height: 300px
+  display: flex
+  position: relative
+
+.movie-card-full__img
+  width: 200px
+  height: 100%
+  margin-right: 30px
+  position: relative
+
+  img
+    display: block
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+.movie-card-full__rating
+  position: absolute
+  top: 10px
+  right: 10px
+  width: 40px
+  height: 40px
+  text-align: center
+  line-height: 40px
+  vertical-align: baseline
+  background: $white_default
+  color: $black_default
+  border-radius: 20px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+
+.movie-card-full__info
+  flex-grow: 1
+
+.movie-card-full__title
+  width: 100%
+  display: flex
+  justify-content: space-between
+  align-items: flex-end
+  margin-bottom: 20px
+
+  a
+    font-size: 26px
+    line-height: 33px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 500
+    text-decoration: none
+    color: $black_default
+
+    &:before
+      content: ''
+      position: absolute
+      width: 100%
+      height: 100%
+      top: 0
+      left: 0
+
+
+  span
+    font-size: 20px
+    line-height: 23px
+    text-transform: uppercase
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 400
+
+.movie-card-full__countries, .movie-card-full__genres
+  font-size: 18px
+  line-height: 25px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+  margin-bottom: 10px
+  text-transform: capitalize
+
+  +min-w($tablet)
+    font-size: 20px
+    line-height: 25px
+    margin-bottom: 10px

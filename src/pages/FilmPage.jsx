@@ -4,6 +4,7 @@ import '../assets/filmPage/filmPage.sass';
 import SequelsPrequels from '../components/SequelsPrequels';
 import SliderComponent from '../components/Slider/SliderComponent';
 import {getDataFilm} from '../scripts/fetchData';
+import {markupData} from "../scripts/filterData";
 
 const FilmPage = () => {
     const {id} = useParams();
@@ -26,15 +27,6 @@ const FilmPage = () => {
 
     }, [id]);
 
-    const markupData = (data, key) => {
-        let markupStr = '';
-
-        data.forEach(item => {
-            markupStr += ` ${item[key]},`;
-        });
-
-        return markupStr.substring(0, markupStr.length - 1);
-    };
 
     return (
         <main className='container content film'>

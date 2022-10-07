@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import '../assets/moviePremiereTape/moviePremiereTape.sass';
-import MoviePremiereTapeCard from './MoviePremiereTapeCard';
+import '../assets/filmCards/filmCard.sass';
+import MovieCard from './filmCards/MovieCard';
 import Preloader from "../UI/Preloader";
 import {getDataPremiereFilms} from "../scripts/fetchData";
 
@@ -40,7 +40,7 @@ const MoviePremiereTape = () => {
                 {
                     isSearch
                     ? <Preloader />
-                    : tapeData.map(item => <MoviePremiereTapeCard posterUrl={item.posterUrl} puthPage={item.kinopoiskId} nameRu={item.nameRu} key={item.kinopoiskId} />)
+                    : tapeData.map(item => <MovieCard posterUrl={item.posterUrl} puthPage={item.kinopoiskId} nameRu={item.nameRu} key={item.kinopoiskId} />)
                 }
             </div>
         </div>

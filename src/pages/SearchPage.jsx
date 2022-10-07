@@ -13,9 +13,10 @@ import {
 } from '../scripts/filterData';
 import FilterRange from '../components/searchPage/FilterRange';
 import Pagination from '../components/searchPage/Pagination';
-import MoviePremiereTapeCard from "../components/MoviePremiereTapeCard";
+import MovieCard from "../components/filmCards/MovieCard";
 import {getDataFilms} from '../scripts/fetchData'
 import Preloader from "../UI/Preloader";
+import MovieCardFull from "../components/filmCards/MovieCardFull";
 
 const SearchPage = () => {
     const filterType = filterTypeData;
@@ -86,7 +87,8 @@ const SearchPage = () => {
     const searchAfterLoad = async () => {
         const objParams = getUrlParams();
         const cyrillicToTranslit = new CyrillicToTranslit();
-        const newKeyword = window.location.href.includes('&RU=change') ? cyrillicToTranslit.reverse(objParams.keyword.replace(/#/g, " ") || "") : objParams.keyword.replace(/#/g, " ")
+        const keywordParams = objParams.keyword || '';
+        const newKeyword = window.location.href.includes('&RU=change') ? cyrillicToTranslit.reverse(keywordParams || "") : keywordParams.replace(/#/g, " ")
 
         setSearchIs(true);
 
@@ -197,7 +199,9 @@ const SearchPage = () => {
                             {
                                 searchIs
                                 ? <Preloader />
-                                : allFilms.map(item => <MoviePremiereTapeCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId}  countries={item.countries[0].country} year={item.year}/>)
+                                : typeView === 'min'
+                                    ? allFilms.map(item => <MovieCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries[0].country} year={item.year}/>)
+                                    : allFilms.map(item => <MovieCardFull key={item.kinopoiskId} genres={item.genres} posterUrl={item.posterUrl} puthPage={item.kinopoiskId} ratingKinopoisk={item.ratingKinopoisk} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries} year={item.year} />)
                             }
                         </div>
                     </div>

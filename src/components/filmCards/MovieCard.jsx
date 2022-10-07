@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const MoviePremiereTapeCard = (props) => {
+const MovieCard = (props) => {
 
     const {posterUrl = '', nameRu = '', puthPage = '', countries = '', year = ''} = props;
 
@@ -20,4 +20,4 @@ const MoviePremiereTapeCard = (props) => {
     );
 };
 
-export default MoviePremiereTapeCard;
+export default MovieCard;
