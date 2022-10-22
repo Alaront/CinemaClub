@@ -7,6 +7,7 @@ const Footer = () => {
                 <div className='container'>
                     © {new Date().getFullYear()} Copyright Text
                     <a className='grey-text text-lighten-4 right' href='https://github.com/Alaront/CinemaClub' target='_blank' rel='noreferrer'>Repo</a>
+                    <a className='grey-text text-lighten-4 right' href='https://kinopoiskapiunofficial.tech/' target='_blank' rel='noreferrer'>API</a>
                 </div>
             </div>
         </footer>
