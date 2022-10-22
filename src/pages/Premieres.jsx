@@ -5,6 +5,7 @@ import {useEffect} from 'react';
 import MovieCard from '../components/filmCards/MovieCard';
 import Preloader from '../UI/Preloader';
 import {getDataPremiereFilms} from '../scripts/fetchData';
+import StepBackPage from "../components/StepBackPage";
 
 const Premieres = () => {
     const dataRef = useRef('');
@@ -36,6 +37,7 @@ const Premieres = () => {
 
     return (
         <main className='container content premieres'>
+            <StepBackPage />
             <h1 className='premieres__title'>Кинопремьеры</h1>
             <form className='premieres__filter' onSubmit={e => e.preventDefault()}>
                 <label>

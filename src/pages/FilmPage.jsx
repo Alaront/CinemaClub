@@ -5,6 +5,7 @@ import SequelsPrequels from '../components/SequelsPrequels';
 import SliderComponent from '../components/Slider/SliderComponent';
 import {getDataFilm} from '../scripts/fetchData';
 import {markupData} from '../scripts/filterData';
+import StepBackPage from "../components/StepBackPage";
 
 const FilmPage = () => {
     const {id} = useParams();
@@ -30,6 +31,7 @@ const FilmPage = () => {
 
     return (
         <main className='container content film'>
+            <StepBackPage />
             <h1 className='film__title'>{film?.nameRu}</h1>
             <div className='film__content'>
                 {
