@@ -24,7 +24,7 @@ const SearchForm = () => {
 
     return (
         <div className='search-form'>
-            <h1 className='search-form__title'><span>CinemaClub</span> - библиотека фильмов и сериалов на основе API <a href='#' target='_blank'>кинопоиска</a></h1>
+            <h1 className='search-form__title'><span>CinemaClub</span> - библиотека фильмов и сериалов на основе API <a href='https://kinopoiskapiunofficial.tech' target='_blank'>кинопоиска</a></h1>
 
             <div className='search-form__form-wrapper'>
                 <form className='search-form__form' onSubmit={e => e.preventDefault()}>

@@ -1,14 +1,13 @@
 import React from 'react';
+import '../assets/footer/footer.sass';
 
 const Footer = () => {
     return (
-        <footer className='page-footer  teal darken-3'>
-            <div className='footer-copyright'>
-                <div className='container'>
-                    © {new Date().getFullYear()} Copyright Text
-                    <a className='grey-text text-lighten-4 right' href='https://github.com/Alaront/CinemaClub' target='_blank' rel='noreferrer'>Repo</a>
-                    <a className='grey-text text-lighten-4 right' href='https://kinopoiskapiunofficial.tech/' target='_blank' rel='noreferrer'>API</a>
-                </div>
+        <footer className='footer'>
+            <div className='footer__wrapper'>
+                <a className='footer__link' href='https://github.com/Alaront/CinemaClub' target='_blank' rel='noreferrer'>Repo: https://github.com/Alaront/CinemaClub</a>
+                <a className='footer__link' href='https://kinopoiskapiunofficial.tech/' target='_blank' rel='noreferrer'>API: https://kinopoiskapiunofficial.tech/</a>
+                <span className="footer__copyright">© {new Date().getFullYear()} Copyright Text</span>
             </div>
         </footer>
     );

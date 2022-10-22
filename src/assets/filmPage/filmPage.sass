@@ -222,6 +222,8 @@
   display: flex
   flex-direction: row
   align-items: flex-start
+  max-width: max-content
+  position: relative
 
   &:nth-child(n+3)
     display: none
@@ -257,14 +259,13 @@
     font-size: 19px
     line-height: 28px
 
-  p
-    font-weight: 100
-    font-size: 12px
-    line-height: 15px
-
-    +min-w($desktop)
-      font-size: 17px
-      line-height: 22px
+  &:after
+    content: ''
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    position: absolute
 
 
 .film__sequels-prequels-btn

@@ -8,7 +8,7 @@ const PageNotFound = () => {
         <div className='container content'>
             <StepBackPage />
 
-            <h1 style={{fontSize: '35px', color: '#cc0d3e'}}>Not found</h1>
+            <h1 style={{fontSize: '35px', color: '#cc0d3e'}}><span style={{display: "block", 'fontSize': '200px'}}>404</span>Not found</h1>
 
         </div>
     );
