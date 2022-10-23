@@ -1,0 +1,66 @@
+@import "../common/common.sass"
+
+.news__title
+  font-size: 19px
+  line-height: 25px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 600
+  color: $black_default
+  margin-bottom: 20px
+
+  +min-w($desktop)
+    font-size: 35px
+    line-height: 48px
+
+.news__content
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+  gap: 20px
+
+  +min-w($tablet)
+    gap: 0
+    margin: 0 -10px
+
+
+
+.post-item
+  width: 100%
+  border: 1px solid $black_default
+  border-radius: 5px
+  text-decoration: none
+  cursor: pointer
+  box-sizing: border-box
+
+  +min-w($tablet)
+    width: calc(50% - 20px)
+    margin: 10px
+
+  +min-w($desktop)
+    width: calc(25% - 20px)
+
+
+  img
+    width: 100%
+    height: 200px
+    text-decoration: 100px
+    object-fit: cover
+    display: block
+    margin-bottom: 20px
+
+  h3
+    font-size: 19px
+    line-height: 25px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 300
+    color: $black_default
+    margin-bottom: 10px
+    padding: 0 10px
+
+  p
+    font-size: 17px
+    line-height: 20px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 200
+    color: $black_default
+    padding: 0 10px 15px 10px

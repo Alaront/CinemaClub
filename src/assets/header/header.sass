@@ -44,6 +44,7 @@
   color: $white_default
   font-family: 'Noto Sans', sans-serif
   font-weight: 600
+  text-decoration: none
 
 .menu__links
   background: #1a1a1a
@@ -83,4 +84,24 @@
   font-family: 'Noto Sans', sans-serif
   font-weight: 400
 
+.login-menu
+  display: flex
+  flex-direction: row
+
+.login-menu-signIn, .login-menu-signUp
+  width: 30px
+  height: 30px
+  box-sizing: border-box
+  background: url("./signIn.svg") center center no-repeat, $white_default
+  background-size: 20px 20px
+  border-radius: 10px
+  margin-right: 20px
+  cursor: pointer
+
+  &:last-child
+    margin-right: 0
+
+.login-menu-signUp
+  background: url("./signUp.svg") center center no-repeat, $white_default
+  background-size: 20px 20px
 

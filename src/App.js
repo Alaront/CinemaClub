@@ -7,6 +7,8 @@ import PageNotFound from './pages/PageNotFound';
 import Premieres from './pages/Premieres';
 import FilmPage from './pages/FilmPage';
 import SearchPage from './pages/SearchPage';
+import SignPage from "./pages/SignPage";
+import NewsPage from "./pages/NewsPage";
 
 function App() {
     return (
@@ -16,6 +18,8 @@ function App() {
                 <Route path='/' element={<Main />} />
                 <Route path='/premieres' element={<Premieres />} />
                 <Route path='/films' element={<SearchPage />} />
+                <Route path='/sign' element={<SignPage />} />
+                <Route path='/news' element={<NewsPage />} />
                 <Route path='/films/:id' element={<FilmPage />} />
                 <Route path='*' element={<PageNotFound />} />
             </Routes>

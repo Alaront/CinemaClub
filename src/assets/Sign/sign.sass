@@ -1,0 +1,57 @@
+@import "../common/common.sass"
+
+.signWrapper
+  display: flex
+  flex-wrap: wrap
+  align-items: flex-start
+  gap: 30px
+
+.sign
+  width: 300px
+  padding: 10px
+  box-sizing: border-box
+  margin: 0 auto 50px auto
+  border: 1px solid $black_default
+  border-radius: 10px
+
+.sign__title
+  font-size: 19px
+  line-height: 25px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 400
+  text-align: center
+  text-transform: uppercase
+  margin-bottom: 30px
+
+  +min-w($desktop)
+    font-size: 22px
+    line-height: 29px
+    margin-bottom: 40px
+
+.sign__form
+  display: flex
+  flex-direction: column
+
+  label
+    font-size: 17px
+    line-height: 22px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 400
+    margin-bottom: 10px
+    display: flex
+    justify-content: space-between
+
+    +min-w($desktop)
+      font-size: 20px
+      line-height: 25px
+
+  input
+    padding: 2px 5px
+
+  button
+    font-size: 19px
+    line-height: 25px
+    outline: none
+    border: 1px solid $black_default
+    border-radius: 5px
+    cursor: pointer
