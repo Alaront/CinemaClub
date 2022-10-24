@@ -88,7 +88,7 @@
   display: flex
   flex-direction: row
 
-.login-menu-signIn, .login-menu-signUp
+.login-menu-signIn, .login-menu-signUp, .login-menu-logout, .login-menu-user
   width: 30px
   height: 30px
   box-sizing: border-box
@@ -97,11 +97,94 @@
   border-radius: 10px
   margin-right: 20px
   cursor: pointer
+  position: relative
 
   &:last-child
     margin-right: 0
 
+  &:after
+    content: none
+    position: absolute
+    left: -2px
+    bottom: -23px
+    background: $white_default
+    color: $black_default
+    text-decoration: none
+    font-size: 14px
+    line-height: 18px
+    transition: 0.5s
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 200
+    padding: 2px
+    box-sizing: border-box
+    text-transform: uppercase
+
+.login-menu-signIn
+
+  +min-w($laptop)
+    &:hover
+      &:after
+        content: 'Вход'
+        left: -42px
+        bottom: 3px
+
+  +min-w('1700px')
+    &:hover
+      &:after
+        content: 'Вход'
+        left: -2px
+        bottom: -23px
+
+.login-menu-logout
+
+  +min-w($laptop)
+    &:hover
+      &:after
+        content: 'Выход'
+        left: -42px
+        bottom: 3px
+
+  +min-w('1700px')
+    &:hover
+      &:after
+        content: 'Выход'
+        left: -2px
+        bottom: -23px
+
+.login-menu-user
+  background: url("./user.svg") center center no-repeat, $white_default
+  background-size: 20px 20px
+
+  +min-w($laptop)
+    &:hover
+      &:after
+        content: 'Кабинет'
+        left: -42px
+        bottom: 3px
+
+  +min-w('1700px')
+    &:hover
+      &:after
+        content: 'Кабинет'
+        left: -2px
+        bottom: -23px
+
 .login-menu-signUp
   background: url("./signUp.svg") center center no-repeat, $white_default
   background-size: 20px 20px
+
+  +min-w($laptop)
+    &:hover
+      &:after
+        content: 'Регистрация'
+        left: -70px
+
+  +min-w('1700px')
+    &:hover
+      &:after
+        content: 'Регистрация'
+        left: -2px
+        bottom: -23px
+
+
 
