@@ -20,12 +20,25 @@
   width: 100px
   height: 100px
   margin-bottom: 20px
+  position: relative
 
   img
     width: 100%
     height: 100%
     object-fit: contain
     border-radius: 50px
+
+  &.load-photo
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      background: url("./loader.svg") center center no-repeat, rgba(56, 56, 56, 0.43)
+      background-size: 55px 55px
+      border-radius: 50px
+      width: 100%
+      height: 100%
 
 
 .account__photo-info
@@ -139,3 +152,10 @@
 
     +min-w($laptop)
       height: 40px
+
+.account__info-update
+  color: $black_default
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 500
+  font-size: 14px
+  line-height: 22px

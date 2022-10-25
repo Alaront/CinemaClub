@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 import {getAuth} from 'firebase/auth';
+import { getStorage} from 'firebase/storage';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API,
@@ -15,19 +16,4 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
 export const auth = getAuth();
-
-//Dohn
-//nameee@bk.ru
-//d2dsfds2fsdf
-
-//Saja
-//sajaMail@bk.ru
-//h6yukdE
-
-//Ananas
-//tesssrecSS@bk.ru
-//fh63yukd4E
-
-///Adam
-//tefdfgfdg@bk.ru
-//refgfgdgh34
+export const storage = getStorage();

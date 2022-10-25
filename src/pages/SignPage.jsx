@@ -4,19 +4,12 @@ import {collection, query, where, getDocs, setDoc, doc} from 'firebase/firestore
 import '../assets/Sign/sign.sass';
 import {auth, db} from '../firebase';
 import {useNavigate} from 'react-router-dom';
+import {validateEmail} from '../scripts/helpers';
 
 const SignPage = () => {
     const [errorUp, setErrorUp] = useState(false);
     const [errorIn, setErrorIn] = useState(false);
     const navigate = useNavigate();
-
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
-    };
 
     const sendDataUp = async (e) => {
         e.preventDefault();
