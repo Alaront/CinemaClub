@@ -5,7 +5,8 @@ import SequelsPrequels from '../components/SequelsPrequels';
 import SliderComponent from '../components/Slider/SliderComponent';
 import {getDataFilm} from '../scripts/fetchData';
 import {markupData} from '../scripts/filterData';
-import StepBackPage from "../components/StepBackPage";
+import StepBackPage from '../components/StepBackPage';
+import ChoiceStars from '../components/ChoiceStars';
 
 const FilmPage = () => {
     const {id} = useParams();
@@ -67,6 +68,8 @@ const FilmPage = () => {
 
             <div className='film__content-info'>
                 <SequelsPrequels id={id}/>
+
+                <ChoiceStars />
             </div>
 
             {
