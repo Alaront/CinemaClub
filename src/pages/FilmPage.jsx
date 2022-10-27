@@ -6,13 +6,18 @@ import SliderComponent from '../components/Slider/SliderComponent';
 import {getDataFilm} from '../scripts/fetchData';
 import {markupData} from '../scripts/filterData';
 import StepBackPage from '../components/StepBackPage';
-import ChoiceStars from '../components/ChoiceStars';
+import ChoiceStars from '../components/filmPage/ChoiceStars';
+import CmmentFilm from '../components/filmPage/СommentFilm';
+
+import {collection, doc, getDocs, query, setDoc, updateDoc, where} from 'firebase/firestore';
+import {db} from '../firebase';
 
 const FilmPage = () => {
     const {id} = useParams();
     const [film, setFilm] = useState();
     const [filmScreen, setFilmScreen] = useState([]);
     const [filmSimilars, setFilmSimilars] = useState([]);
+    const [filmCCGrade, setFilmCCGrade] = useState();
 
     const getFilmData = async () => {
         const {film, screen, similars} = await getDataFilm(id);
@@ -20,6 +25,20 @@ const FilmPage = () => {
         setFilm(film);
         setFilmScreen(screen);
         setFilmSimilars(similars);
+
+        getFilmGrade();
+    };
+
+    const getFilmGrade = async () => {
+        const q = query(collection(db, 'films'), where('id', '==', id));
+        const querySnapshot = await getDocs(q);
+
+        console.log('querySnapshot', querySnapshot);
+        querySnapshot.forEach((doc) => {
+            setFilmCCGrade(doc.data().grade);
+        });
+
+        if(querySnapshot.size === 0) setFilmCCGrade( ' - ');
     };
 
     useEffect(() => {
@@ -46,7 +65,7 @@ const FilmPage = () => {
                                     <ul>
                                         <li className='film__info-rating--kinopoisk' >Kinopoisk {film.ratingKinopoisk}</li>
                                         <li className='film__info-rating--imdb' >Imdb {film.ratingImdb}</li>
-                                        <li className='film__info-rating--cc'>CC 10.7</li>
+                                        <li className='film__info-rating--cc'>CC {filmCCGrade || '-'}</li>
                                     </ul>
                                 </div>
                                 <div className='film__info-data'>
@@ -69,7 +88,7 @@ const FilmPage = () => {
             <div className='film__content-info'>
                 <SequelsPrequels id={id}/>
 
-                <ChoiceStars />
+                <ChoiceStars id={id}/>
             </div>
 
             {
@@ -86,6 +105,10 @@ const FilmPage = () => {
                         <h4>Список похожих фильмов</h4>
                         <SliderComponent data={filmSimilars} sliderType='card' viewArray={[2, 5, 9]} spaceBetween={10}/>
                     </div> : <></>
+            }
+
+            {
+                <CmmentFilm />
             }
         </main>
     );

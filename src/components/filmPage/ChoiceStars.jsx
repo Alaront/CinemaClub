@@ -1,13 +1,20 @@
 import React, {useEffect, useMemo, useState} from 'react';
+import {collection, doc, getDocs, query, setDoc, updateDoc, where} from 'firebase/firestore';
+import {auth, db} from '../../firebase';
+import average from 'average';
+import {useContext} from 'react';
+import {ContextAuth} from '../../context/contextAuth';
 
-const ChoiceStars = () => {
+const ChoiceStars = ({id}) => {
     const [starFull, setStarFull] = useState(0);
     const [starChoice, setStarChoice] = useState(false);
     const [lastChoice, setLastChoice] = useState(0);
     const [gradeInfo, setGradeInfo] = useState({
         grade: 1,
-        text: 'Epic',
+        text: 'Хуже некуда',
     });
+
+    const {user} = useContext(ContextAuth);
 
     const changeGrade = () => {
         switch (starFull) {
@@ -82,6 +89,30 @@ const ChoiceStars = () => {
         changeGrade();
     }, [starFull]);
 
+    useEffect(() => {
+        getUserGrade();
+    }, [id, user]);
+
+    const getUserGrade = async () => {
+        if(!user.uid) return;
+
+        const q = query(collection(db, 'users'), where('uid', '==', user.uid));
+        const querySnapshot = await getDocs(q);
+
+        console.log('querySnapshot', querySnapshot);
+        querySnapshot.forEach((doc) => {
+            const filmsGrade = doc.data().filmsGrade;
+
+            console.log('filmsGrade', filmsGrade);
+
+            if(Object.keys(filmsGrade).length){
+                setLastChoice(filmsGrade[id]);
+                setStarFull(filmsGrade[id]);
+                setStarChoice(true);
+            }
+        });
+    };
+
 
     const starHover = ({target}) => {
 
@@ -102,6 +133,51 @@ const ChoiceStars = () => {
     const choiceStar = (index) => {
         setStarChoice(true);
         setLastChoice(index);
+        setGrade(index);
+    };
+
+    const setGrade = async (grade) => {
+        const q = query(collection(db, 'films'), where('id', '==', id));
+        const querySnapshot = await getDocs(q);
+        if(querySnapshot.size === 0) {
+            await setDoc(doc(db, 'films', id), {
+                id,
+                grade,
+            });
+        } else {
+            let oldGrade = 0;
+            querySnapshot.forEach((doc) => {
+                oldGrade = doc.data().grade;
+            });
+            await updateDoc(doc(db, 'films', id), {
+                grade: Math.round(average([oldGrade, grade])),
+            });
+        }
+
+        const userQ = query(collection(db, 'users'), where('uid', '==', user.uid));
+        const querySnapshotUser = await getDocs(userQ);
+        let userFilmGrade = null;
+        querySnapshotUser.forEach((doc) => {
+            userFilmGrade = doc.data().filmsGrade;
+        });
+
+        console.log('userFilmGrade', userFilmGrade);
+
+        if(userFilmGrade != null || userFilmGrade !== undefined) {
+            console.log('doc.data().filmsGrade', userFilmGrade);
+            await updateDoc(doc(db, 'users', user.uid), {
+                filmsGrade: {
+                    ...userFilmGrade,
+                    [id]: grade,
+                },
+            });
+        } else {
+            await updateDoc(doc(db, 'users', user.uid), {
+                filmsGrade: {
+                    [id]: grade,
+                },
+            });
+        }
     };
 
     return (
