@@ -7,10 +7,9 @@ import {getDataFilm} from '../scripts/fetchData';
 import {markupData} from '../scripts/filterData';
 import StepBackPage from '../components/StepBackPage';
 import ChoiceStars from '../components/filmPage/ChoiceStars';
-import CmmentFilm from '../components/filmPage/СommentFilm';
-
 import {collection, doc, getDocs, query, setDoc, updateDoc, where} from 'firebase/firestore';
 import {db} from '../firebase';
+import CommentFilm from '../components/filmPage/СommentFilm';
 
 const FilmPage = () => {
     const {id} = useParams();
@@ -108,7 +107,7 @@ const FilmPage = () => {
             }
 
             {
-                <CmmentFilm />
+                <CommentFilm />
             }
         </main>
     );

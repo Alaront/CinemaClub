@@ -1,16 +1,18 @@
 import React from 'react';
+import UserComment from './UserComment';
+import UsersComments from './UsersComments';
 
-const CmmentFilm = () => {
+const CommentFilm = () => {
     return (
         <div className='comment-film'>
             <h4>Комментарии</h4>
 
-            <div className='comment-film__comment-wrapper'>
-                <textarea className='comment-film__info'></textarea>
-            </div>
+            <UsersComments />
+
+            <UserComment />
 
         </div>
     );
 };
 
-export default CmmentFilm;
+export default CommentFilm;

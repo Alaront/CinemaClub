@@ -330,6 +330,10 @@
 .choice-stars__wrapper
   display: flex
   min-height: 45px
+  flex-direction: column
+
+  +min-w($tablet)
+    flex-direction: row
 
 .choice-stars__stars
   display: flex
@@ -337,11 +341,14 @@
   max-width: max-content
 
 .choice-stars__star
-  width: 40px
-  height: 40px
+  width: 20px
+  height: 20px
   position: relative
   margin-right: 5px
 
+  +min-w($tablet)
+    width: 40px
+    height: 40px
 
   &:after
     content: ''
@@ -388,3 +395,69 @@
     +min-w($desktop)
       font-size: 25px
       line-height: 32px
+      margin-bottom: 30px
+
+.comment-film__info
+  width: 100%
+  min-height: 300px
+  height: auto
+  font-size: 19px
+  line-height: 25px
+  font-family: 'Noto Sans', sans-serif
+  margin-bottom: 20px
+  padding: 15px 10px
+  box-sizing: border-box
+
+.comment-film__btn
+  font-size: 18px
+  line-height: 22px
+  font-family: 'Noto Sans', sans-serif
+  font-style: normal
+  font-weight: 300
+  cursor: pointer
+  padding: 10px 15px
+  box-sizing: border-box
+  background: $green_default
+  border: 2px solid $white_default
+  border-radius: 5px
+  color: $white_default
+
+.comment-film__users-comments
+  margin-bottom: 10px
+
+  +min-w($desktop)
+    margin-bottom: 30px
+
+.comment-film__users-comments-item
+  margin-bottom: 20px
+  box-sizing: border-box
+
+.comment-film__users-comments-info
+  display: flex
+  align-items: center
+  margin-bottom: 20px
+
+  span
+    font-size: 20px
+    line-height: 25px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 300
+    color: $black_default
+
+
+.comment-film__users-comments-img
+  width: 50px
+  height: 50px
+  margin-right: 20px
+
+  img
+    width: 100%
+    object-fit: cover
+
+
+.comment-film__users-comments-text
+  font-size: 16px
+  line-height: 20px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 100
+  color: $black_default
