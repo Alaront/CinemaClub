@@ -2,14 +2,14 @@ import React from 'react';
 import UserComment from './UserComment';
 import UsersComments from './UsersComments';
 
-const CommentFilm = () => {
+const CommentFilm = ({id}) => {
     return (
         <div className='comment-film'>
             <h4>Комментарии</h4>
 
-            <UsersComments />
+            <UsersComments id={id}/>
 
-            <UserComment />
+            <UserComment id={id}/>
 
         </div>
     );

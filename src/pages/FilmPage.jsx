@@ -107,7 +107,7 @@ const FilmPage = () => {
             }
 
             {
-                <CommentFilm />
+                <CommentFilm id={id}/>
             }
         </main>
     );

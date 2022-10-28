@@ -67,7 +67,7 @@ async function getSearchFilmHome(name) {
 
 function getHeaders() {
     return {
-        'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY_2,
+        'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_UNOFFICIAL_KEY,
         'Content-Type': 'application/json',
     };
 }
