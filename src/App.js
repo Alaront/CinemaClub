@@ -11,6 +11,7 @@ import SignPage from './pages/SignPage';
 import NewsPage from './pages/NewsPage';
 import UserAccount from './pages/UserAccount';
 import PageNewPost from './pages/PageNewPost';
+import PostPage from './pages/PostPage';
  
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/sign' element={<SignPage />} />
                 <Route path='/post' element={<NewsPage />} />
                 <Route path='/newPost' element={<PageNewPost />} />
+                <Route path='/post/:id' element={<PostPage />} />
                 <Route path='/films/:id' element={<FilmPage />} />
                 <Route path='*' element={<PageNotFound />} />
             </Routes>

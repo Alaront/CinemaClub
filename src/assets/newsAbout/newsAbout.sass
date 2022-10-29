@@ -12,6 +12,26 @@
     font-size: 35px
     line-height: 48px
 
+.post__write
+  font-size: 15px
+  line-height: 20px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 200
+  text-transform: uppercase
+  margin-bottom: 20px
+  display: block
+  padding: 5px 10px
+  background-color: $green_default
+  border-radius: 5px
+  max-width: max-content
+  color: $white_default
+  cursor: pointer
+
+  +min-w($desktop)
+    font-size: 18px
+    line-height: 24px
+
+
 .post__content
   display: flex
   flex-wrap: wrap
@@ -21,8 +41,6 @@
   +min-w($tablet)
     gap: 0
     margin: 0 -10px
-
-
 
 .post-item
   width: 100%

@@ -1,19 +1,52 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../assets/newsAbout/newsAbout.sass';
 import PostItem from '../components/PostItem';
+import { collection, getDocs, query } from 'firebase/firestore';
+import {db} from '../firebase';
+import StepBackPage from '../components/StepBackPage';
+import {useNavigate} from 'react-router-dom';
+import {useContext} from 'react';
+import {ContextAuth} from '../context/contextAuth';
 
 const NewsPage = () => {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        getPosts();
+    }, []);
+
+    const navigate = useNavigate();
+
+    const {user} = useContext(ContextAuth);
+
+    const getPosts = async () => {
+        const q = query(collection(db, 'postPreview'));
+        const querySnapshot = await getDocs(q);
+
+        const newPosts = [];
+        querySnapshot.forEach((doc) => {
+            newPosts.push(doc.data());
+        });
+        setPosts(newPosts);
+    };
+
+    const writePost = () => {
+        if(user){
+            navigate('/newPost');
+        } else {
+            navigate('/sign');
+        }
+    };
+
     return (
         <div className='container content news'>
+            <StepBackPage />
             <h2 className='post__title'>Статьи</h2>
-
+            <span className='post__write' onClick={writePost}>Написать статью</span>
             <div className='post__content'>
-                <PostItem title='Title 1' idPuth='id_post' />
-                <PostItem title='Title 2' idPuth='id_post' />
-                <PostItem title='Title 3' idPuth='id_post' />
-                <PostItem title='Title 4' idPuth='id_post' />
-                <PostItem title='Title 5' idPuth='id_post' />
-                <PostItem title='Title 6' idPuth='id_post' />
+                {
+                    posts.length > 0 && posts.map(item => <PostItem key={item.id} title={item.title} idPuth={item.id} cover={item.cover} text={item.text}/>)
+                }
             </div>
         </div>
     );

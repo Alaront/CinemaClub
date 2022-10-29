@@ -1,0 +1,56 @@
+@import "../common/common.sass"
+
+.post-page
+  h2
+    font-size: 46px
+    line-height: 47px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 800
+    color: $black_default
+    margin-bottom: 30px
+
+  p
+    font-size: 17px
+    line-height: 23px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 200
+    color: $black_default
+
+.post-page__cover
+  width: 100%
+  max-height: 500px
+  object-fit: contain
+  display: block
+  margin: 0 auto 20px auto
+
+.post__author
+  display: flex
+  align-items: center
+  max-width: max-content
+  margin: 0 auto 20px auto
+
+  img
+    width: 60px
+    height: 60px
+    display: block
+    border-radius: 30px
+    overflow: hidden
+    margin-right: 30px
+
+  span
+    font-size: 21px
+    line-height: 26px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 200
+    color: $black_default
+    position: relative
+
+    &:after
+      content: ''
+      position: absolute
+      top: 13px
+      left: -14px
+      border-radius: 50%
+      width: 3px
+      height: 3px
+      background: $black_default
