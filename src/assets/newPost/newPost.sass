@@ -1,0 +1,103 @@
+@import "../common/common.sass"
+
+.news
+  h4
+    font-size: 19px
+    line-height: 25px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 500
+    color: $black_default
+    margin-bottom: 15px
+
+    +min-w($desktop)
+      font-size: 25px
+      line-height: 32px
+
+.news__form
+  display: flex
+  flex-direction: column
+
+  button
+    font-weight: 200
+    text-transform: uppercase
+    background-color: $green_default
+    outline: none
+    border: none
+    color: $white_default
+    flex: 1
+    max-width: 300px
+    cursor: pointer
+    padding: 5px 10px
+    border-radius: 15px
+    font-size: 18px
+    line-height: 22px
+    font-family: 'Noto Sans', sans-serif
+
+    +min-w($mob_mx)
+      padding: 10px 15px
+      font-size: 20px
+      line-height: 25px
+
+    +min-w($laptop)
+      padding: 15px 20px
+      font-size: 22px
+      line-height: 35px
+
+.news__form label, .news__form input, .news__form textarea, .news__cover
+  display: flex
+  flex-direction: column
+  margin-bottom: 18px
+  font-size: 22px
+  line-height: 35px
+  font-family: 'Noto Sans', sans-serif
+  font-weight: 200
+  color: $black_default
+
+  +min-w($desktop)
+    font-size: 23px
+    line-height: 40px
+
+.news__cover
+  input
+    display: none
+
+label .news__cover-wrapper
+  display: flex
+  flex-direction: row
+  align-items: center
+  flex-wrap: wrap
+
+  img
+    width: 300px
+    object-fit: contain
+    display: block
+    margin-right: 20px
+
+
+  p
+    font-size: 22px
+    line-height: 35px
+    font-family: 'Noto Sans', sans-serif
+    font-weight: 200
+    color: $red_default
+
+    +min-w($desktop)
+      font-size: 23px
+      line-height: 40px
+
+
+.news__cover--error
+  border: 1px solid $red_default
+
+.news__text
+  textarea
+    min-height: 400px
+
+.news__cover-img
+  width: 100px
+  height: 100px
+  background: url("./cover-bg.svg") 0 0 no-repeat
+  background-size: cover
+  cursor: pointer
+  margin-right: 50px
+

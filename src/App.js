@@ -10,6 +10,7 @@ import SearchPage from './pages/SearchPage';
 import SignPage from './pages/SignPage';
 import NewsPage from './pages/NewsPage';
 import UserAccount from './pages/UserAccount';
+import PageNewPost from './pages/PageNewPost';
  
 function App() {
     return (
@@ -21,7 +22,8 @@ function App() {
                 <Route path='/films' element={<SearchPage />} />
                 <Route path='/account' element={<UserAccount />} />
                 <Route path='/sign' element={<SignPage />} />
-                <Route path='/news' element={<NewsPage />} />
+                <Route path='/post' element={<NewsPage />} />
+                <Route path='/newPost' element={<PageNewPost />} />
                 <Route path='/films/:id' element={<FilmPage />} />
                 <Route path='*' element={<PageNotFound />} />
             </Routes>

@@ -19,9 +19,7 @@ const HeaderMenu = () => {
                 <ul>
                     <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='/'>Главная</Link></li>
                     <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='/films'>Поиск</Link></li>
-                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='/news'>Новости</Link></li>
-                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Рецензии</Link></li>
-                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='#'>Топы</Link></li>
+                    <li><Link className='menu__link' onClick={() => setOpenMenu(!openMenu)} to='/post'>Статьи</Link></li>
                 </ul>
             </nav>
         </div>
