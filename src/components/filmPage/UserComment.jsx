@@ -4,15 +4,23 @@ import {db} from '../../firebase';
 import {v4 as uuid} from 'uuid';
 import {useContext} from 'react';
 import {ContextAuth} from '../../context/contextAuth';
+import {useNavigate} from 'react-router-dom';
 
 const UserComment = ({id}) => {
 
     const infoRef = useRef();
 
+    const navigate = useNavigate();
+
     const {user} = useContext(ContextAuth);
 
     const handleSend = async (e) => {
         e.preventDefault();
+
+        if(!user)  {
+            navigate('/sign');
+            return;
+        }
 
         const textData = infoRef.current.value.trim();
 

@@ -12,6 +12,7 @@ import NewsPage from './pages/NewsPage';
 import UserAccount from './pages/UserAccount';
 import PageNewPost from './pages/PageNewPost';
 import PostPage from './pages/PostPage';
+import ProtectedRoute from './components/ProtectedRoute';
  
 function App() {
     return (
@@ -21,7 +22,7 @@ function App() {
                 <Route path='/' element={<Main />} />
                 <Route path='/premieres' element={<Premieres />} />
                 <Route path='/films' element={<SearchPage />} />
-                <Route path='/account' element={<UserAccount />} />
+                <Route path='/account' element={<ProtectedRoute>  <UserAccount /> </ ProtectedRoute >} />
                 <Route path='/sign' element={<SignPage />} />
                 <Route path='/post' element={<NewsPage />} />
                 <Route path='/newPost' element={<PageNewPost />} />

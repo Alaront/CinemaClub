@@ -4,6 +4,7 @@ import {auth, db} from '../../firebase';
 import average from 'average';
 import {useContext} from 'react';
 import {ContextAuth} from '../../context/contextAuth';
+import {useNavigate} from 'react-router-dom';
 
 const ChoiceStars = ({id}) => {
     const [starFull, setStarFull] = useState(0);
@@ -15,6 +16,8 @@ const ChoiceStars = ({id}) => {
     });
 
     const {user} = useContext(ContextAuth);
+
+    const navigate = useNavigate();
 
     const changeGrade = () => {
         switch (starFull) {
@@ -131,6 +134,11 @@ const ChoiceStars = ({id}) => {
     };
 
     const choiceStar = (index) => {
+        if(!user)  {
+            navigate('/sign');
+            return;
+        }
+
         setStarChoice(true);
         setLastChoice(index);
         setGrade(index);

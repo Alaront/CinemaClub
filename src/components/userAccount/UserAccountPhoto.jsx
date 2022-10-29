@@ -23,10 +23,10 @@ const UserAccountPhoto = () => {
         querySnapshot.forEach((doc) => {
             setUrlPhoto(doc.data().photoURL);
 
-            setTimeout(() => {
-                setLoadPhoto(false);
-            }, 1000);
         });
+        setTimeout(() => {
+            setLoadPhoto(false);
+        }, 1000);
     };
 
     const changePhoto = (e) => {
