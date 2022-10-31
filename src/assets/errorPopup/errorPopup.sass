@@ -1,0 +1,34 @@
+@import "../common/common"
+
+.error-popup
+  position: fixed
+  top: 50px
+  right: 10px
+  width: calc(100% - 20px)
+  max-width: 300px
+  background: $red_default
+  padding: 10px 35px 10px 15px
+  z-index: 1
+  box-sizing: border-box
+  font-family: 'Noto Sans', sans-serif
+  font-style: normal
+  font-weight: 500
+  font-size: 14px
+  line-height: 20px
+  color: $white_default
+  border-radius: 20px
+  display: none
+
+  &.popup-show
+    display: block
+
+.error-popup-close
+  width: 20px
+  height: 20px
+  background: url("close.svg") 0 0 no-repeat, center
+  background-size: contain
+  display: block
+  position: absolute
+  top: 10px
+  right: 10px
+  cursor: pointer

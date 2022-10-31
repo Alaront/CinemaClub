@@ -201,7 +201,7 @@ const SearchPage = () => {
                                 searchIs
                                     ? <Preloader />
                                     : typeView === 'min'
-                                        ? allFilms.map(item => <MovieCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries[0].country} year={item.year}/>)
+                                        ? allFilms.map(item => <MovieCard key={item.kinopoiskId} posterUrl={item.posterUrl} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries[0]?.country} year={item.year}/>)
                                         : allFilms.map(item => <MovieCardFull key={item.kinopoiskId} genres={item.genres} posterUrl={item.posterUrl} puthPage={item.kinopoiskId} ratingKinopoisk={item.ratingKinopoisk} nameRu={item.nameRu} puthPage={item.kinopoiskId} countries={item.countries} year={item.year} />)
                             }
                         </div>

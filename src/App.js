@@ -13,11 +13,13 @@ import UserAccount from './pages/UserAccount';
 import PageNewPost from './pages/PageNewPost';
 import PostPage from './pages/PostPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import ErrorPopup from './layout/ErrorPopup';
  
 function App() {
     return (
         <>
             <Header />
+            <ErrorPopup />
             <Routes>
                 <Route path='/' element={<Main />} />
                 <Route path='/premieres' element={<Premieres />} />
