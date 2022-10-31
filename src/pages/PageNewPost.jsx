@@ -43,6 +43,7 @@ const PageNewPost = () => {
                 title,
                 text: text.substr(0, 90),
                 cover,
+                moder: false,
             });
 
             titleRef.current.value = '';

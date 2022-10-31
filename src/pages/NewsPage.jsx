@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../assets/newsAbout/newsAbout.sass';
 import PostItem from '../components/PostItem';
-import { collection, getDocs, query } from 'firebase/firestore';
+import {collection, getDocs, query, where} from 'firebase/firestore';
 import {db} from '../firebase';
 import StepBackPage from '../components/StepBackPage';
 import {useNavigate} from 'react-router-dom';
@@ -20,7 +20,7 @@ const NewsPage = () => {
     const {user} = useContext(ContextAuth);
 
     const getPosts = async () => {
-        const q = query(collection(db, 'postPreview'));
+        const q = query(collection(db, 'postPreview'),  where('moder', '==', true));
         const querySnapshot = await getDocs(q);
 
         const newPosts = [];

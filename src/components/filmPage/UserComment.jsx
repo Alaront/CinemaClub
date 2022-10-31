@@ -34,6 +34,7 @@ const UserComment = ({id}) => {
                 id: uuid(),
                 text: textData,
                 userUid: user.uid,
+                moder: false,
             });
         } else {
             await updateDoc(doc(db, 'films', id), {
@@ -41,6 +42,7 @@ const UserComment = ({id}) => {
                     id: uuid(),
                     text: textData,
                     userUid: user.uid,
+                    moder: false,
                 }
                 ),
             });

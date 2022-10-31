@@ -4,7 +4,7 @@ import {collection, getDocs, query, where} from 'firebase/firestore';
 import {db} from '../../firebase';
 
 const UsersCommentsItem = (props) => {
-    const { userUid = '0', text = ''} = props;
+    const { userUid = '0', text = '', moder} = props;
 
     const [userData, setUserData] = useState({
         userPhoto,
@@ -31,6 +31,8 @@ const UsersCommentsItem = (props) => {
             });
         });
     };
+
+    if(!moder) return; 
 
     return (
         <div className='comment-film__users-comments-item'>

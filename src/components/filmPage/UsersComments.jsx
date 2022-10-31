@@ -22,7 +22,7 @@ const UsersComments = ({id}) => {
     return (
         <div className='comment-film__users-comments'>
             {
-                comments.length > 0 && comments.map(item => <UsersCommentsItem userUid={item.userUid} text={item.text} key={item.id}/>)
+                comments.length > 0 && comments.map(item => <UsersCommentsItem userUid={item.userUid} moder={item.moder ? item.moder : false} text={item.text} key={item.id}/>)
             }
         </div>
     );
