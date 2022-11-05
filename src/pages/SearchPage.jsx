@@ -193,7 +193,7 @@ const SearchPage = () => {
                     <FilterRange title={'Рейтинг'} data={searchParams.ratingData} dataLimits={ratingDataLimits} changeYearData={changeRatingData}/>
                 </div>
                 <div className='search-page__result'>
-                    <div className='search-page__result-wrapper'>
+                    <div className={`search-page__result-wrapper ${typeView === 'min' ? 'min-result' : 'max-result'}`}>
                         <h2 className='search-page__title'>Поиск по:  {searchTitle}</h2>
                         <SearchResultSort typeSort={searchParams.order} changeTypeSort={changeTypeSort} changeTypeView={changeTypeView}/>
                         <div className='search-page__result-carts'>
